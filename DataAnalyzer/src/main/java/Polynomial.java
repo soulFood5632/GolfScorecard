@@ -1,5 +1,7 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class Polynomial {
 
@@ -53,10 +55,9 @@ public class Polynomial {
      * @param independentVariable the value to plug into this polynomial.
      * @return a double representing the value of f(x).
      */
-
     public double calculateValue(int independentVariable){
         double currValue = 0;
-        for(int index = 0; index <= POLYNOMIAL_ORDER; index++){
+        for(int index = 0; index < constants.length; index++){
             currValue += constants[index] * Math.pow(independentVariable, index);
         }
 
@@ -69,8 +70,13 @@ public class Polynomial {
      * @return An int representing the order of this polynomial
      */
     public int getPolynomialOrder(){
-        return POLYNOMIAL_ORDER;
+        return constants.length - 1;
     }
+
+    public List<Double> getPolynomial(){
+        return Arrays.stream(constants).boxed().collect(Collectors.toList());
+    }
+
 
 
 }

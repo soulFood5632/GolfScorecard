@@ -8,9 +8,9 @@ public class DataCollector {
 
     private final Map<String, Polynomial> regressionModels;
 
-    private static final double EPSILON = 0.01;
-    private static final double STEP_SIZE = 0.1;
-    private static final double TOLERANCE = 0.9;
+    private static final double EPSILON = 0.0001;
+    private static final double STEP_SIZE = 0.001;
+    private static final double TOLERANCE = 0.99;
 
     public DataCollector(List<String> lieTypes){
         trainingData = new HashMap<>();
@@ -44,13 +44,26 @@ public class DataCollector {
 
     public void runRegression(){
 
+//       String lieType = "green";
+//
+//        Map<Integer, Double> trainingSet = trainingData.get(lieType);
+//                double rSquared = calculateError(trainingSet, regressionModels.get(lieType));
+//                while(TOLERANCE > rSquared) {
+//                    Vector<Double> gradient = findGradient(EPSILON, regressionModels.get(lieType), trainingSet);
+//                    gradient = gradient.stream().map(value -> value * -STEP_SIZE).collect(Collectors.toCollection(Vector::new));
+//                    regressionModels.get(lieType).modifyPolynomial(gradient);
+//                    rSquared = calculateError(trainingSet, regressionModels.get(lieType));
+//                }
+
+
+
         for(String lieType: trainingData.keySet()) {
             Thread thread = new Thread(() -> {
                 Map<Integer, Double> trainingSet = trainingData.get(lieType);
                 double rSquared = calculateError(trainingSet, regressionModels.get(lieType));
-                while(TOLERANCE > rSquared){
+                while (TOLERANCE > rSquared) {
                     Vector<Double> gradient = findGradient(EPSILON, regressionModels.get(lieType), trainingSet);
-                    gradient = gradient.stream().map(value -> value * STEP_SIZE).collect(Collectors.toCollection(Vector::new));
+                    gradient = gradient.stream().map(value -> value * -STEP_SIZE).collect(Collectors.toCollection(Vector::new));
                     regressionModels.get(lieType).modifyPolynomial(gradient);
                     rSquared = calculateError(trainingSet, regressionModels.get(lieType));
                 }
@@ -63,11 +76,11 @@ public class DataCollector {
 
     /**
      * Calculates the R^2 error of this given regression model
-     * @param trainingSet The training data set
+     * @param trainingSet The training data set. Must not all entries must not be equal.
      * @param regressionModel The provided regression model
      * @return The R^2 value of this regression model with the given dataset.
      */
-    private double calculateError(Map<Integer, Double> trainingSet, Polynomial regressionModel){
+    public static double calculateError(Map<Integer, Double> trainingSet, Polynomial regressionModel){
         Set<Integer> valueSet = trainingSet.keySet();
         double sumSquaredRegression = valueSet.stream().
                 map(yardage -> trainingSet.get(yardage) - regressionModel.calculateValue(yardage)).
@@ -81,7 +94,7 @@ public class DataCollector {
         double sumSquaredMean = valueSet.stream().
                 map(yardage -> trainingSet.get(yardage) - mean).
                 map(value -> Math.pow(value, 2)).
-                reduce( 0.0, Double::sum);
+                reduce(0.0, Double::sum);
 
         return 1 - sumSquaredRegression / sumSquaredMean;
 
@@ -96,12 +109,12 @@ public class DataCollector {
      * The nth entry of the vector corresponds to the nth coefficient's
      * derivative.
      */
-    private Vector<Double> findGradient(double epsilon,
+    private static Vector<Double> findGradient(double epsilon,
                                         Polynomial regressionModel,
                                         Map<Integer, Double> trainingData) {
 
         Vector<Double> gradientVector = new Vector<>();
-        for(int index = 0; index < regressionModel.getPolynomialOrder(); index++){
+        for(int index = 0; index <= regressionModel.getPolynomialOrder() ; index++){
             Polynomial epsilonPoly = regressionModel.epsilonPoly(epsilon, index);
             double epsilonDifference = calculateError(trainingData, regressionModel)
                     - calculateError(trainingData, epsilonPoly);
