@@ -4,13 +4,21 @@ import java.util.stream.Collectors;
 public class DataCollector {
 
 
-    private Map<String, Map<Integer, Double>> trainingData;
+    private final Map<String, Map<Integer, Double>> trainingData;
+
+    private final Map<String, Polynomial> regressionModels;
+
+    private static final double EPSILON = 0.01;
+    private static final double STEP_SIZE = 0.1;
+    private static final double TOLERANCE = 0.9;
 
     public DataCollector(List<String> lieTypes){
         trainingData = new HashMap<>();
+        regressionModels = new HashMap<>();
 
         for(String lieType: lieTypes){
             trainingData.put(lieType, new HashMap<>());
+            regressionModels.put(lieType, Polynomial.randomPolynomial());
         }
 
     }
@@ -36,14 +44,29 @@ public class DataCollector {
 
     public void runRegression(){
 
-        Thread thread1 = new Thread(() -> {
+        for(String lieType: trainingData.keySet()) {
+            Thread thread = new Thread(() -> {
+                Map<Integer, Double> trainingSet = trainingData.get(lieType);
+                double rSquared = calculateError(trainingSet, regressionModels.get(lieType));
+                while(TOLERANCE > rSquared){
+                    Vector<Double> gradient = findGradient(EPSILON, regressionModels.get(lieType), trainingSet);
+                    gradient = gradient.stream().map(value -> value * STEP_SIZE).collect(Collectors.toCollection(Vector::new));
+                    regressionModels.get(lieType).modifyPolynomial(gradient);
+                    rSquared = calculateError(trainingSet, regressionModels.get(lieType));
+                }
+            });
 
+            thread.start();
+        }
 
-        });
     }
 
-
-
+    /**
+     * Calculates the R^2 error of this given regression model
+     * @param trainingSet The training data set
+     * @param regressionModel The provided regression model
+     * @return The R^2 value of this regression model with the given dataset.
+     */
     private double calculateError(Map<Integer, Double> trainingSet, Polynomial regressionModel){
         Set<Integer> valueSet = trainingSet.keySet();
         double sumSquaredRegression = valueSet.stream().
@@ -66,21 +89,34 @@ public class DataCollector {
 
     /**
      * Finds the gradient of this current model
-     * @param epsilon
-     * @return
+     * @param epsilon the epsilon to get the gradient from
+     * @param regressionModel The current regression model
+     * @param trainingData The trainingData currently being modelled
+     * @return A vector representing a gradient of the function.
+     * The nth entry of the vector corresponds to the nth coefficient's
+     * derivative.
      */
-
-    private Vector<Double> findGradient(int epsilon,
+    private Vector<Double> findGradient(double epsilon,
                                         Polynomial regressionModel,
                                         Map<Integer, Double> trainingData) {
 
+        Vector<Double> gradientVector = new Vector<>();
+        for(int index = 0; index < regressionModel.getPolynomialOrder(); index++){
+            Polynomial epsilonPoly = regressionModel.epsilonPoly(epsilon, index);
+            double epsilonDifference = calculateError(trainingData, regressionModel)
+                    - calculateError(trainingData, epsilonPoly);
+            gradientVector.add(epsilonDifference / epsilon);
+        }
 
+        return gradientVector;
 
     }
 
+    public Map<String, Polynomial> getRegressionModels() {
+        return regressionModels;
+    }
 
-
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException {
 
 
         String myString = "10 2.18 20 2.40 30 2.52 40 2.60 50 2.66 60 2.70 70 2.72 80 2.75 90 2.77 100 2.92 2.80 120 2.99 2.85 140 2.97 2.91 160 2.99 2.98 180 3.05 3.08 200 3.12 3.19 220 3.17 3.32 240 3.25 3.45 260 3.45 3.58 280 3.65 3.69 300 3.71 3.78 320 3.79 3.84 340 3.86 3.88 360 3.92 3.95 380 3.96 4.03 400 3.99 4.11 420 4.02 4.19 440 4.08 4.27 460 4.17 4.34 480 4.28 4.42 500 4.41 4.50 520 4.54 4.58 540 4.65 4.66 560 4.74 4.74 580 4.79 4.82 600 4.82 4.89";
@@ -90,18 +126,36 @@ public class DataCollector {
         String[] topData = myString.split(" ");
         String[] bottomData = otherData.split(" ");
 
+        DataCollector myDataSet = new DataCollector(List.of("tee", "fairway", "rough", "sand", "recovery"));
+
+
         for(int indexTop = 0, indexBottom = 0; indexBottom < bottomData.length;){
             int distance = Integer.parseInt(topData[indexTop++]);
             double tee;
             if(distance >= 100){
                 tee = Double.parseDouble(topData[indexTop++]);
+                myDataSet.addData("tee", distance, tee);
             }
             double fairway = Double.parseDouble(topData[indexTop++]);
-            double rough = Double.parseDouble(bottomData[indexBottom++]);
-            double sand = Double.parseDouble(bottomData[indexBottom++]);
-            double recovery = Double.parseDouble(bottomData[indexBottom++]);
+            myDataSet.addData("fairway", distance, fairway);
 
+            double rough = Double.parseDouble(bottomData[indexBottom++]);
+            myDataSet.addData("rough", distance, rough);
+
+            double sand = Double.parseDouble(bottomData[indexBottom++]);
+            myDataSet.addData("sand", distance, sand);
+
+            double recovery = Double.parseDouble(bottomData[indexBottom++]);
+            myDataSet.addData("recovery", distance, recovery);
         }
+
+        myDataSet.runRegression();
+
+
+
+        Thread.sleep(1000);
+
+
 
 
     }
