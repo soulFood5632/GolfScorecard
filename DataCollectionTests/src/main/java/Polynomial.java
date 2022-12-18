@@ -18,7 +18,7 @@ public class Polynomial {
 
     public void modifyPolynomial(Vector<Double> modifier){
         for(int index = 0; index < constants.length; index++){
-            constants[index] = modifier.get(index);
+            constants[index] += modifier.get(index);
         }
     }
 

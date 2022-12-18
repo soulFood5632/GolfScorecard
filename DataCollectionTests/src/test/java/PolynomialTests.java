@@ -1,8 +1,11 @@
+
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 public class PolynomialTests {
 
@@ -18,7 +21,24 @@ public class PolynomialTests {
     }
 
     @Test
-    public void
+    public void testModifiedPolynomial(){
+        double[] myPolyArr = {1, 7, 2};
+        Polynomial polynomial = new Polynomial(myPolyArr);
+
+        Vector<Double> vectorModifier = new Vector<>();
+
+        vectorModifier.add(0.0);
+        vectorModifier.add(1.0);
+        vectorModifier.add(2.0);
+
+
+        polynomial.modifyPolynomial(vectorModifier);
+
+        Assertions.assertEquals(1, polynomial.calculateValue(0), 0.01);
+        Assertions.assertEquals(13, polynomial.calculateValue(1), 0.01);
+    }
+
+
 
 
 }
