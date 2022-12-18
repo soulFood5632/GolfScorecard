@@ -18,11 +18,42 @@ struct Position {
         self.lieType = lieType
     }
     
+    /**
+     Gets the expected shots to hole out based on the PGA tour benchmark
+     */
+    public func getExpectedShots() -> Double{
+        switch lieType {
+        case Lie.tee:
+            return 0
+        case Lie.fairway:
+            
+        case Lie.recovery:
+            
+        case Lie.rough:
+            
+        case Lie.bunker:
+            
+        case Lie.green:
+            
+        case Lie.hazard:
+            
 
+        }
+    }
     
+    /**
+     Gets the lie of this position.
+     */
+    public func getLie() -> Lie {
+        return lieType
+    }
     
-    
-    
+    /**
+     Gets the distance of this position
+     */
+    public func getDistance() -> Int {
+        return distance
+    }
     
 }
 
@@ -33,5 +64,6 @@ enum Lie {
     case recovery
     case bunker
     case green
+    case hazard
 }
 

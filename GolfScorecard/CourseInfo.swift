@@ -10,18 +10,8 @@ import Foundation
 public class CouseInfo{
     
     private var teeInfo = [String: (Int, Float, [HoleInfo])]()
-    private var name: String
     
-    init(name: String){
-        self.name = name
-    }
-    
-    /**
-     Updates the name of the course. Returns true if the the name was succsefully changed
-     */
-    public func updateCourseName(name: String) -> Bool{
-        self.name = name
-        return true
+    init(){
     }
     
     /**
@@ -74,8 +64,29 @@ public class CouseInfo{
      Gets the list of tee names for this course
      */
     public func getTeeNames() -> [String] {
-        return [String]()
+        return teeInfo.map{teeName, information in teeName}
     }
+    
+    /**
+     Appends the teeInfo with a list of HoleInfo.
+     
+     Requires: teeName must exist
+     */
+    public func addHoleInfo(teeName: String, info: [HoleInfo]) throws {
+        if doesTeeExist(teeName: teeName) {
+            throw RetreivalError.NoTeeExists
+        }
+        teeInfo[teeName]?.2.append(contentsOf: info)
+    }
+    
+    /**
+     Checks if the tee of that name exists. Returns true if it does, false otherwise.
+     */
+    public func doesTeeExist(teeName: String) -> Bool {
+        return getTeeNames().contains(teeName)
+    }
+    
+    
     
     
 }
