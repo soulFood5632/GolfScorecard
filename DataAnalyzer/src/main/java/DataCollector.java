@@ -1,5 +1,13 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
+
+
+
+
 
 public class DataCollector {
 
@@ -124,6 +132,12 @@ public class DataCollector {
         return gradientVector;
 
     }
+
+    public JsonObject getJsonData(){
+
+    }
+
+    Gson gson = new Gson();
 
     public Map<String, Polynomial> getRegressionModels() {
         return regressionModels;
