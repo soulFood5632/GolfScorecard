@@ -69,7 +69,6 @@
 		02CCDB2B294E494400A3424F /* CourseInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTests.swift; sourceTree = "<group>"; };
 		02CCDB2D294E568A00A3424F /* CourseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDatabase.swift; sourceTree = "<group>"; };
 		02CCDB2F294E863400A3424F /* RegressionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegressionModel.swift; sourceTree = "<group>"; };
-		02CCDB31294E885700A3424F /* ReadMe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReadMe.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,7 +119,6 @@
 		02CCDAED294C24E500A3424F /* GolfScorecard */ = {
 			isa = PBXGroup;
 			children = (
-				02CCDB31294E885700A3424F /* ReadMe.h */,
 				02CCDAEE294C24E500A3424F /* GolfScorecardApp.swift */,
 				02CCDAF0294C24E500A3424F /* ContentView.swift */,
 				02CCDAF2294C24E600A3424F /* Assets.xcassets */,
