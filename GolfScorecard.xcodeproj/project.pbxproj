@@ -25,7 +25,6 @@
 		02CCDB2A294E39BC00A3424F /* HoleInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB29294E39BC00A3424F /* HoleInfoTests.swift */; };
 		02CCDB2C294E494400A3424F /* CourseInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB2B294E494400A3424F /* CourseInfoTests.swift */; };
 		02CCDB2E294E568A00A3424F /* CourseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB2D294E568A00A3424F /* CourseDatabase.swift */; };
-		02CCDB30294E863400A3424F /* RegressionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB2F294E863400A3424F /* RegressionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +67,6 @@
 		02CCDB29294E39BC00A3424F /* HoleInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleInfoTests.swift; sourceTree = "<group>"; };
 		02CCDB2B294E494400A3424F /* CourseInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTests.swift; sourceTree = "<group>"; };
 		02CCDB2D294E568A00A3424F /* CourseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDatabase.swift; sourceTree = "<group>"; };
-		02CCDB2F294E863400A3424F /* RegressionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegressionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +131,6 @@
 				02CCDB21294C40CC00A3424F /* Hole.swift */,
 				02CCDB1D294C3EE800A3424F /* Shot.swift */,
 				02CCDB1F294C402A00A3424F /* Position.swift */,
-				02CCDB2F294E863400A3424F /* RegressionModel.swift */,
 			);
 			path = GolfScorecard;
 			sourceTree = "<group>";
@@ -301,7 +298,6 @@
 				02CCDAF1294C24E500A3424F /* ContentView.swift in Sources */,
 				02CCDB20294C402A00A3424F /* Position.swift in Sources */,
 				02CCDB1A294C251F00A3424F /* Round.swift in Sources */,
-				02CCDB30294E863400A3424F /* RegressionModel.swift in Sources */,
 				02CCDB1E294C3EE800A3424F /* Shot.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,
 				02CCDB26294D8F5900A3424F /* CourseInfo.swift in Sources */,

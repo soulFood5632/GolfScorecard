@@ -66,7 +66,7 @@ struct Shot{
 
 
 
-enum ShotType{
+public enum ShotType{
     case drive
     case shot
     case putt

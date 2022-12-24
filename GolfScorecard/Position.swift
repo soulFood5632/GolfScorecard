@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Position {
+public struct Position {
     
     private let distance: Int
     private let lieType : Lie
@@ -26,17 +26,17 @@ struct Position {
         case Lie.tee:
             return 0
         case Lie.fairway:
-            
+            return 0
         case Lie.recovery:
-            
+            return 0
         case Lie.rough:
-            
+            return 0
         case Lie.bunker:
-            
+            return 0
         case Lie.green:
-            
+            return 0
         case Lie.hazard:
-            
+            return 0
 
         }
     }

@@ -11,19 +11,24 @@ class Hole {
     
     private var shots: [Shot]
     private let holeInfo: HoleInfo
+    
+    
+    /**
+     Initilizer with a list of shots already included. This list must be ordered from first shot to last shot.
+     */
 
     init(shots: [Shot], holeInfo: HoleInfo) {
-        self.shots = shots
         self.holeInfo = holeInfo
+        self.shots = shots
+    
     }
     
     /**
-     Adds a shot the end of the list
+     Adds a shot to the end of the list
      
      <\l>
      Requires: Shot != nil
      */
-    
     public func addShot(shotToAdd : Shot) {
         shots.append(shotToAdd)
     }
@@ -34,11 +39,18 @@ class Hole {
      <\l>
      Requires: All shots != nil
      */
-    
     public func addShots(shotsToAdd : [Shot]) {
         for shotToAdd in shotsToAdd {
             shots.append(shotToAdd)
         }
+    }
+    
+    
+    /**
+     Adds a shot at the specified shotNumber. All other shots below will be bumped down
+     */
+    public func addShot(shotNum: Int, shotToAdd: Shot) {
+        shots.insert(shotToAdd, at: shotNum)
     }
     
     /**
@@ -46,9 +58,24 @@ class Hole {
      * 
      * Effects: Returns an integer totalling the score of the player on this hole
      */
-    public func getScore() -> Int{
+    public func getScore() -> Int {
         return shots.count
     }
+    
+    /**
+     Gets the expected score of this hole
+     */
+    public func getExpectedScore() -> Double {
+        return holeInfo.getStartPosition().getExpectedShots()
+    }
+    
+    /**
+     Gets a list of the shots on this hole. 
+     */
+    public func getShots() -> [Shot] {
+        return shots
+    }
+    
     
     
 }

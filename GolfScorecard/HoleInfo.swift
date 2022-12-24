@@ -57,10 +57,18 @@ public class HoleInfo{
     /**
      Gets the information of the hole in a tuple of the format (Par, Yardage)
      */
-    
     public func getHoleInfo() -> (Int, Int) {
         return (par, yardage)
     }
+    
+    
+    /**
+     Gets the start position of this hole
+     */
+    public func getStartPosition() -> Position {
+        return Position(distance: yardage, lieType: Lie.tee)
+    }
+    
 
     
 }
