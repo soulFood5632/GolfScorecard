@@ -16,11 +16,14 @@ class Hole {
     /**
      Initilizer with a list of shots already included. This list must be ordered from first shot to last shot.
      */
-
     init(shots: [Shot], holeInfo: HoleInfo) {
         self.holeInfo = holeInfo
         self.shots = shots
+    }
     
+    init(holeInfo: HoleInfo){
+        self.shots = [Shot]()
+        self.holeInfo = holeInfo
     }
     
     /**
@@ -74,6 +77,14 @@ class Hole {
      */
     public func getShots() -> [Shot] {
         return shots
+    }
+    
+    
+    /**
+     Gets the hole information.
+     */
+    public func getHoleInfo() -> HoleInfo {
+        return holeInfo
     }
     
     

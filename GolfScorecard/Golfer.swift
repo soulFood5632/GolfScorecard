@@ -8,12 +8,16 @@
 import Foundation
 
 class Golfer{
-    private var name : String
+    private var userID: String
     private var handicap : Double
     
-    init(name: String, handicap: Double) {
-        self.name = name
-        self.handicap = handicap
+    private let DEFAULT_HANDICAP: Double = 36.0
+    
+    init(name: String) {
+        self.userID = name
+        self.handicap = DEFAULT_HANDICAP
     }
+    
+    
     
 }

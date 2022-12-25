@@ -7,20 +7,22 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LoginView: View {
+    
+    @State private var userID: String = ""
+    @FocusState private var IDFocus: Bool
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        TextField("User ID", text: $userID)
+            .focused($IDFocus)
+            .onSubmit {
+                <#code#>
+            }
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        LoginView()
     }
 }

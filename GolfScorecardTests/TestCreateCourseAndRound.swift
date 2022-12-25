@@ -1,8 +1,8 @@
 //
-//  CourseInfoTests.swift
+//  TestCreateCourseAndRound.swift
 //  GolfScorecardTests
 //
-//  Created by Logan Underwood on 2022-12-17.
+//  Created by Logan Underwood on 2022-12-23.
 //
 
 import Foundation
@@ -10,21 +10,24 @@ import Foundation
 import XCTest
 @testable import GolfScorecard
 
-final class CourseInfoTests: XCTestCase {
+final class TestCreateCourseAndRound: XCTestCase {
+    
+    private let myDatabase = CourseDatabase()
+    private var seymourCourseInfo = CourseInfo()
 
 
-    func testMakeCourse() throws {
-        var hole1 = HoleInfo(par: 4, yardage: 450)
+
+    func testIllegalRequests() throws {
+        XCTAssertFalse(myDatabase.isCourse(name: "Seymour Golf and Country Club"))
+        XCTAssertFalse(seymourCourseInfo.doesTeeExist(teeName: "Black"))
         
-        XCTAssertTrue(hole1.getPar() == 4)
-        XCTAssertTrue(hole1.getYardage() == 450)
         
-        var myPar = hole1.getPar()
         
-        myPar = 10
         
-        XCTAssertEqual(4, hole1.getPar())
+        
     }
+    
+    
     
     func testModifyHole() throws {
         var hole1 = HoleInfo(par: 4, yardage: 450)
@@ -51,3 +54,4 @@ final class CourseInfoTests: XCTestCase {
     }
 
 }
+

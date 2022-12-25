@@ -57,7 +57,7 @@ public struct Position {
     
 }
 
-enum Lie {
+public enum Lie {
     case tee
     case fairway
     case rough

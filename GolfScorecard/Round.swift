@@ -7,22 +7,53 @@
 
 import Foundation
 
-struct Round {
+class Round {
     
     private var datePlayed: Date
     private var scorecard: Scorecard!
-    private var courseInfo: CouseInfo!
     
-    init(datePlayed: Date, courseInfo: CouseInfo, scorecard : Scorecard){
+    /**
+     A round with an explcit date
+     */
+    init(datePlayed: Date, courseData: (Int, Float, [HoleInfo])){
         self.datePlayed = datePlayed
-        self.scorecard = scorecard
-        self.courseInfo = courseInfo
+        self.scorecard = Scorecard(courseTemplate: courseData)
     }
     
-    init(datePlayed: Date, courseInfo: CouseInfo){
-        self.datePlayed = datePlayed
-        self.courseInfo = courseInfo
+    /**
+     A round with an implcit date, set to the current date
+     */
+    init(courseData: (Int, Float, [HoleInfo])){
+        self.datePlayed = Date.now
+        self.scorecard = Scorecard(courseTemplate: courseData)
     }
+    
+    
+    /**
+     Gets the scorecard for the current round
+     */
+    public func getScorecard() -> Scorecard {
+        return scorecard
+    }
+    
+    
+    /**
+     Updates the date of the round
+     */
+    public func changeDate(newDate: Date) {
+        self.datePlayed = newDate
+    }
+    
+    /**
+     Updates the scorecard of this round to the new scorecard
+     */
+    public func updateScorecard(newCard: Scorecard) {
+        self.scorecard = newCard
+    }
+    
+    /*
+     More on reports below
+     */
     
     
     

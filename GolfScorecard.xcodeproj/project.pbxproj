@@ -23,8 +23,10 @@
 		02CCDB26294D8F5900A3424F /* CourseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB25294D8F5900A3424F /* CourseInfo.swift */; };
 		02CCDB28294D9A3000A3424F /* HoleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB27294D9A3000A3424F /* HoleInfo.swift */; };
 		02CCDB2A294E39BC00A3424F /* HoleInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB29294E39BC00A3424F /* HoleInfoTests.swift */; };
-		02CCDB2C294E494400A3424F /* CourseInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB2B294E494400A3424F /* CourseInfoTests.swift */; };
 		02CCDB2E294E568A00A3424F /* CourseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB2D294E568A00A3424F /* CourseDatabase.swift */; };
+		02CCDB332956812100A3424F /* TestCreateCourseAndRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB322956812100A3424F /* TestCreateCourseAndRound.swift */; };
+		02CCDB352956842600A3424F /* RetreivalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB342956842600A3424F /* RetreivalError.swift */; };
+		02CCDB3729581FFC00A3424F /* GolferList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB3629581FFC00A3424F /* GolferList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +67,10 @@
 		02CCDB25294D8F5900A3424F /* CourseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfo.swift; sourceTree = "<group>"; };
 		02CCDB27294D9A3000A3424F /* HoleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleInfo.swift; sourceTree = "<group>"; };
 		02CCDB29294E39BC00A3424F /* HoleInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleInfoTests.swift; sourceTree = "<group>"; };
-		02CCDB2B294E494400A3424F /* CourseInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInfoTests.swift; sourceTree = "<group>"; };
 		02CCDB2D294E568A00A3424F /* CourseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDatabase.swift; sourceTree = "<group>"; };
+		02CCDB322956812100A3424F /* TestCreateCourseAndRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCreateCourseAndRound.swift; sourceTree = "<group>"; };
+		02CCDB342956842600A3424F /* RetreivalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetreivalError.swift; sourceTree = "<group>"; };
+		02CCDB3629581FFC00A3424F /* GolferList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolferList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,9 +127,11 @@
 				02CCDAF7294C24E600A3424F /* GolfScorecard.entitlements */,
 				02CCDAF4294C24E600A3424F /* Preview Content */,
 				02CCDB23294D8ECA00A3424F /* Golfer.swift */,
+				02CCDB3629581FFC00A3424F /* GolferList.swift */,
 				02CCDB19294C251F00A3424F /* Round.swift */,
 				02CCDB2D294E568A00A3424F /* CourseDatabase.swift */,
 				02CCDB25294D8F5900A3424F /* CourseInfo.swift */,
+				02CCDB342956842600A3424F /* RetreivalError.swift */,
 				02CCDB27294D9A3000A3424F /* HoleInfo.swift */,
 				02CCDB1B294C25A000A3424F /* Scorecard.swift */,
 				02CCDB21294C40CC00A3424F /* Hole.swift */,
@@ -148,7 +154,7 @@
 			children = (
 				02CCDB00294C24E600A3424F /* GolfScorecardTests.swift */,
 				02CCDB29294E39BC00A3424F /* HoleInfoTests.swift */,
-				02CCDB2B294E494400A3424F /* CourseInfoTests.swift */,
+				02CCDB322956812100A3424F /* TestCreateCourseAndRound.swift */,
 			);
 			path = GolfScorecardTests;
 			sourceTree = "<group>";
@@ -298,7 +304,9 @@
 				02CCDAF1294C24E500A3424F /* ContentView.swift in Sources */,
 				02CCDB20294C402A00A3424F /* Position.swift in Sources */,
 				02CCDB1A294C251F00A3424F /* Round.swift in Sources */,
+				02CCDB3729581FFC00A3424F /* GolferList.swift in Sources */,
 				02CCDB1E294C3EE800A3424F /* Shot.swift in Sources */,
+				02CCDB352956842600A3424F /* RetreivalError.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,
 				02CCDB26294D8F5900A3424F /* CourseInfo.swift in Sources */,
 				02CCDAEF294C24E500A3424F /* GolfScorecardApp.swift in Sources */,
@@ -311,7 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02CCDB01294C24E600A3424F /* GolfScorecardTests.swift in Sources */,
-				02CCDB2C294E494400A3424F /* CourseInfoTests.swift in Sources */,
+				02CCDB332956812100A3424F /* TestCreateCourseAndRound.swift in Sources */,
 				02CCDB2A294E39BC00A3424F /* HoleInfoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

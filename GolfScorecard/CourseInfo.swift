@@ -7,18 +7,18 @@
 
 import Foundation
 
-public class CouseInfo{
+public class CourseInfo{
     
-    private var teeInfo = [String: (Int, Float, [HoleInfo])]()
+    private var teeInfo: [String: (Int, Float, [HoleInfo])]
     
-    init(){
+    init() {
+        self.teeInfo = [String: (Int, Float, [HoleInfo])]()
     }
     
     /**
      Adds a tee to the course. Returns false if the tee of the same name already exists,
      true otherwise. In the both cases the data is updated
      */
-    
     public func addTee(name: String, slope: Int, rating: Float) -> Bool{
         if(teeInfo[name] != nil){
             teeInfo[name] = (slope, rating, [HoleInfo]())
@@ -89,13 +89,8 @@ public class CouseInfo{
     
     
     
+    
+    
 }
 
-/**
- Error for incorrect tee name calls
- */
 
-public enum RetreivalError: Error{
-    case NoTeeExists
-    case NoHoleExists
-}
