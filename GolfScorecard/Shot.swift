@@ -21,7 +21,6 @@ struct Shot{
     /**
      Gets the shot type
      */
-    
     public func getShotType() -> ShotType {
         return shotType
     }
@@ -44,14 +43,14 @@ struct Shot{
      Gets the expected value to hole out from the starting position
      */
     public func getPriorExpectedShots() -> Double {
-        return 0
+        return startPos.getExpectedShots()
     }
     
     /**
      Gets the expected value to hole out from the ending position position
      */
     public func getAfterExpectedShots() -> Double {
-        return 0
+        return endPos.getExpectedShots()
     }
     
     /**

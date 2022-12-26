@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class HoleInfo{
+public class HoleInfo : Equatable{
     
     /**
      A basic hole. A 400 yard par 4.
@@ -68,6 +68,14 @@ public class HoleInfo{
     public func getStartPosition() -> Position {
         return Position(distance: yardage, lieType: Lie.tee)
     }
+    
+    /**
+     Equals method for this dataType
+     */
+    public static func == (lhs: HoleInfo, rhs: HoleInfo) -> Bool {
+        return lhs.getHoleInfo().0 == rhs.getHoleInfo().0 && lhs.getHoleInfo().1 == rhs.getHoleInfo().1
+    }
+    
     
 
     

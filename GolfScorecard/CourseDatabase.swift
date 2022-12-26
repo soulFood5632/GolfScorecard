@@ -12,18 +12,21 @@ public class CourseDatabase {
     
     private var listOfCourses: [String: CourseInfo]
     
+    private var courseSet: Set<String>
+    
     init(){
         self.listOfCourses = [String: CourseInfo]()
+        self.courseSet = Set<String>()
     }
     
     /**
      Finds if a course of that name exists.
      */
     public func isCourse(name: String) -> Bool {
-        if listOfCourses[name] != nil {
+        if courseSet.contains(name) {
             return true
         }
-        
+
         return false
     }
     
@@ -33,6 +36,7 @@ public class CourseDatabase {
      */
     public func addCourse(name: String, courseData: CourseInfo) {
         listOfCourses[name] = courseData
+        courseSet.insert(name)
     }
     
     /**
@@ -43,6 +47,14 @@ public class CourseDatabase {
             return course
         }
         throw RetreivalError.CourseNotFound
+    }
+    
+    /**
+     Gets a set of all courses in the database
+     */
+    
+    public func getCourseList() -> Set<String> {
+        return courseSet
     }
     
     

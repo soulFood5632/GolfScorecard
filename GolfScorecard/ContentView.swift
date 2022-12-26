@@ -10,13 +10,12 @@ import SwiftUI
 struct LoginView: View {
     
     @State private var userID: String = ""
-    @FocusState private var IDFocus: Bool
+    
     
     var body: some View {
         TextField("User ID", text: $userID)
-            .focused($IDFocus)
             .onSubmit {
-                <#code#>
+                
             }
     }
 }

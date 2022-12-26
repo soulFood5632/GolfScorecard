@@ -52,10 +52,10 @@ public class CourseInfo{
         guard let holeYardages = teeInfo[name]?.2 else {
             throw RetreivalError.NoTeeExists
         }
-        if holeNum >= holeYardages.count {
+        if holeNum > holeYardages.count {
             throw RetreivalError.NoHoleExists
         }
-        return holeYardages[holeNum]
+        return holeYardages[holeNum - 1]
         
 
     }
@@ -73,10 +73,49 @@ public class CourseInfo{
      Requires: teeName must exist
      */
     public func addHoleInfo(teeName: String, info: [HoleInfo]) throws {
-        if doesTeeExist(teeName: teeName) {
+        if !doesTeeExist(teeName: teeName) {
             throw RetreivalError.NoTeeExists
         }
         teeInfo[teeName]?.2.append(contentsOf: info)
+    }
+    
+    /**
+     Appends the teeInfo with a single entry of HoleInfo.
+     
+     Requires: teeName must exist
+     */
+    
+    public func addHoleInfo(teeName: String, info: HoleInfo) throws {
+        if !doesTeeExist(teeName: teeName) {
+            throw RetreivalError.NoTeeExists
+        }
+        teeInfo[teeName]?.2.append(info)
+    }
+    
+    /**
+     Helper method to add a bulk set of yardages. The tee names key corresponds to the order of the yardages
+     of the list in the tuple. Each teename must exist or a retreival error will be thrown. 
+     */
+    
+    public func bulkHoleInfoAdd(teeNamesKey: [String], holeData: [(Int, [Int])]) throws {
+        for teeName in teeNamesKey {
+            if !doesTeeExist(teeName: teeName) {
+                throw RetreivalError.NoTeeExists
+            }
+        }
+        
+        for multiTeeIndividualHoleData in holeData {
+            var index = 0;
+            for individualTeeHoleData in multiTeeIndividualHoleData.1 {
+                let newHoleData = HoleInfo(par: multiTeeIndividualHoleData.0, yardage: individualTeeHoleData)
+                do {
+                    try addHoleInfo(teeName: teeNamesKey[index], info: newHoleData)
+                } catch RetreivalError.NoTeeExists {
+                    fatalError("Illegal Input of teeKey")
+                }
+                index += 1
+            }
+        }
     }
     
     /**
