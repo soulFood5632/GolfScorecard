@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Position {
+public struct Position: Equatable {
     
     private let distance: Int
     private let lieType : Lie
@@ -17,6 +17,7 @@ public struct Position {
         self.distance = distance
         self.lieType = lieType
     }
+    
     
     /**
      Gets the expected shots to hole out based on the PGA tour benchmark
@@ -43,6 +44,14 @@ public struct Position {
         }
     }
     
+    
+    /**
+     Gets a holed out position.
+     */
+    public static func holedOut() -> Position {
+        return Position(distance: 0, lieType: Lie.holed)
+    }
+    
     /**
      Gets the lie of this position.
      */
@@ -55,6 +64,13 @@ public struct Position {
      */
     public func getDistance() -> Int {
         return distance
+    }
+    
+    /**
+     Equals method for this dataType
+     */
+    public static func == (lhs: Position, rhs: Position) -> Bool {
+        return lhs.getLie() == rhs.getLie() && lhs.getDistance() == rhs.getDistance()
     }
     
 }

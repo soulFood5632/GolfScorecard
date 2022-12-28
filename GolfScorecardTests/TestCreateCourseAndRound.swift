@@ -235,9 +235,6 @@ final class TestCreateCourseAndRound: XCTestCase {
         XCTAssertEqual(HoleInfo(par: 3, yardage: 155), try myDatabase.getCourse(name: "Makai Golf Club").getHoleData(name: "White", holeNum: 7))
         XCTAssertEqual(HoleInfo(par: 4, yardage: 476), try myDatabase.getCourse(name: "Makai Golf Club").getHoleData(name: "Black", holeNum: 17))
         
-    }
-    
-    func testCMakeGolfer() throws {
         
         XCTAssertTrue(myGolferList.addGolfer(userID: golfer1.0, password: golfer1.1))
         
@@ -265,21 +262,19 @@ final class TestCreateCourseAndRound: XCTestCase {
         XCTAssertTrue(myGolferList.addGolfer(userID: golfer2.0, password: golfer2.1))
         XCTAssertTrue(myGolferList.addGolfer(userID: golfer3.0, password: golfer3.1))
         
-        
-        
-        
-    }
     
-    func testDMakeMoreGolfers() throws {
-        var round1 = Round(courseData: try makaiCourseInfo.getTeeData(name: "Black"))
         
+        //Golfer 1 round
+        
+        var round1 = Round(courseData: try myDatabase.getCourse(name: "Makai Golf Club").getTeeData(name: "Black"))
         var myCard = round1.getScorecard()
-        
         var holesList = myCard.getAllHoles()
         
+        var holeNum = 1
+        
+        
         for (_, hole) in holesList {
-            
-            var shot = Shot(startPos: Position(distance: hole.getHoleInfo().getYardage(), lieType: Lie.tee), endPos: Position(distance: 231, lieType: Lie.fairway))
+            var shot = Shot(startPos: hole.getHoleInfo().getStartPosition(), endPos: Position(distance: 231, lieType: Lie.fairway))
             hole.addShot(shotToAdd: shot)
             
             shot = Shot(startPos: Position(distance: 231, lieType: Lie.fairway), endPos: Position(distance: 13, lieType: Lie.bunker))
@@ -291,13 +286,79 @@ final class TestCreateCourseAndRound: XCTestCase {
             shot = Shot(startPos: Position(distance: 5, lieType: Lie.green), endPos: Position(distance: 0, lieType: Lie.holed))
             hole.addShot(shotToAdd: shot)
             
+            try myCard.overwriteHole(holeNumber: holeNum, holeEntry: hole)
+            
+            
+            holeNum += 1
         }
         
+        myCard.lockRound()
+        
+        XCTAssertTrue(myCard.isLocked())
+        
+        XCTAssertThrowsError(try myCard.overwriteHole(holeNumber: 4, holeEntry: Hole(holeInfo: HoleInfo(par: 4, yardage: 467))))
+        XCTAssertEqual(4 * 18, myCard.getScore())
+        XCTAssertEqual(4 * 18, myCard.getScore())
+        myCard.unlockRound()
+        XCTAssertFalse(myCard.isLocked())
+        XCTAssertEqual(4 * 18, myCard.getScore())
+        XCTAssertEqual(4 * 18, myCard.getScore())
+        myCard.lockRound()
+        
+        XCTAssertTrue(myCard.isLocked())
+        XCTAssertEqual(Shot(startPos: Position(distance: 231, lieType: Lie.fairway), endPos: Position(distance: 13, lieType: Lie.bunker)), try myCard.getShotsFromHole(holeNum: 7)[1])
+        XCTAssertTrue(myCard.getAllShots().contains(Shot(startPos: Position(distance: 231, lieType: Lie.fairway), endPos: Position(distance: 13, lieType: Lie.bunker))))
+        XCTAssertFalse(myCard.getAllShots().contains(Shot(startPos: Position(distance: 232, lieType: Lie.fairway), endPos: Position(distance: 13, lieType: Lie.bunker))))
+        XCTAssertTrue(abs(myCard.getDifferential() - 113/134 * (72 - 75.4)) <= 0.01)
         
         
+        
+        try myGolferList.addRound(userID: golfer1.0, password: golfer1.1, roundToAdd: round1)
+        
+        XCTAssertTrue(try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getNumberOfRounds() == 1)
+        XCTAssertTrue(try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getRounds()[0].getRoundID() == round1.getRoundID())
+        
+        
+        //Streamlined entry Platform
+        
+        var round2 = Round(courseData: try myDatabase.getCourse(name: "Makai Golf Club").getTeeData(name: "White"))
+        myCard = round2.getScorecard()
+        holesList = myCard.getAllHoles()
+        
+        
+        
+        for (_, hole) in holesList {
+            
+            var journey = [Position]()
+            
+            journey.append(hole.getHoleInfo().getStartPosition())
+            journey.append(Position(distance: 210, lieType: Lie.recovery))
+            journey.append(Position(distance: 123, lieType: Lie.bunker))
+            journey.append(Position(distance: 4, lieType: Lie.green))
+            
+            hole.postionalBasedShotEntry(positionList: journey)
+            
+            XCTAssertEqual(4, hole.getScore())
+            
+            XCTAssertTrue(hole.getShots().contains(Shot(startPos: Position(distance: 4, lieType: Lie.green), endPos: Position.holedOut())))
+            
+        }
+        
+        myCard.lockRound()
+        
+        XCTAssertTrue(myCard.isLocked())
+        XCTAssertEqual(72, myCard.getScore())
+        XCTAssertThrowsError(try myCard.overwriteHole(holeNumber: 12, holeEntry: Hole(holeInfo: HoleInfo(par: 4, yardage: 546))))
+        XCTAssertThrowsError(try myCard.addHole(holeNumber: 12, holeEntry: Hole(holeInfo: HoleInfo(par: 4, yardage: 546))))
+        
+        XCTAssertTrue(myCard.getAllShots().contains(Shot(startPos: holesList[1]!.getHoleInfo().getStartPosition(), endPos: Position(distance: 210, lieType: Lie.recovery))))
+        
+        XCTAssertTrue(abs(myCard.getDifferential() - 113/125 * (72 - 69.6)) <= 0.01)
         
         
     }
+    
+    
     
     
     

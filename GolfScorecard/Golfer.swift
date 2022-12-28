@@ -29,6 +29,23 @@ class Golfer{
         return handicap
     }
     
+    
+    /**
+     Gets the number of rounds played by this golfer
+     */
+    public func getNumberOfRounds() -> Int {
+        return roundList.count
+    }
+    
+    
+    
+    /**
+     Gets the list of all rounds played by this golfer
+     */
+    public func getRounds() -> [Round] {
+        return roundList
+    }
+    
     /**
      Adds a round to the user's history
      */

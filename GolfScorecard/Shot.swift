@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Shot{
+struct Shot: Equatable{
     private let startPos: Position
     private let endPos: Position
     private let shotType: ShotType
@@ -59,6 +59,9 @@ struct Shot{
      Gets the expected value to hole out from the ending position position
      */
     public func getAfterExpectedShots() -> Double {
+        if endPos.getLie() == Lie.hazard {
+            //TODO: Deal with this special case
+        }
         return endPos.getExpectedShots()
     }
     
@@ -68,6 +71,13 @@ struct Shot{
     
     public func getShotsGained() -> Double {
         return getAfterExpectedShots() - getPriorExpectedShots() - 1
+    }
+    
+    /**
+     Equals method for this dataType
+     */
+    public static func == (lhs: Shot, rhs: Shot) -> Bool {
+        return lhs.getStart() == rhs.getStart() && lhs.getEnd() == rhs.getEnd()
     }
     
 }

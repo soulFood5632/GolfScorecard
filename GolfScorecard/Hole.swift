@@ -50,10 +50,16 @@ class Hole {
     
     
     /**
-     Adds a shot at the specified shotNumber. All other shots below will be bumped down
+     Adds a shot at the specified shotNumber. All other shots below will be bumped down.
+     If the shot number is greater than the current number of shots, then it will added
+     to the end
      */
     public func addShot(shotNum: Int, shotToAdd: Shot) {
-        shots.insert(shotToAdd, at: shotNum)
+        if shotNum >= shots.count {
+            shots.append(shotToAdd)
+        } else {
+            shots.insert(shotToAdd, at: shotNum)
+        }
     }
     
     /**
@@ -87,7 +93,24 @@ class Hole {
         return holeInfo
     }
     
-    //TODO: Add functionality for streamlined positional entry
+    /**
+     A streamlined data entry method containing all the positions from the hole.
+     e.g -> the first element in the list is the first position, the second element
+     is the second positon... the Nth entry is the Nth position. **NOTE** do not include
+     the holed position
+     */
+    public func postionalBasedShotEntry(positionList: [Position]) {
+        for index in 0...positionList.count - 1 {
+            if index + 1 == positionList.count {
+                addShot(shotToAdd: Shot(startPos: positionList[index], endPos: Position.holedOut()))
+                return
+            }
+            addShot(shotToAdd: Shot(startPos: positionList[index], endPos: positionList[index + 1]))
+            
+        }
+    }
+    
+    
     
     
     

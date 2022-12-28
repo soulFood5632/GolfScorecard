@@ -57,8 +57,9 @@ class GolferList {
         do {
             if try checkPassword(userID: userID, passwordEntry: password) {
                 passwordList[userID]!.1.addRound(roundToAdd: roundToAdd)
+            } else {
+                throw RetreivalError.IncorrectPassword
             }
-            throw RetreivalError.IncorrectPassword
         } catch RetreivalError.NoGolferExists {
             throw RetreivalError.NoGolferExists
         }
