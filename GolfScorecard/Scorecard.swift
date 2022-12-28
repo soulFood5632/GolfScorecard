@@ -15,8 +15,8 @@ class Scorecard {
     private var rating: Float
     private var confirmed: Bool
     
-    private var cachedScore: Int!
-    private var cachedShots: [Shot]!
+    private var cachedScore: Int?
+    private var cachedShots: [Shot]?
     
     
     
@@ -50,6 +50,13 @@ class Scorecard {
         }
         throw RetreivalError.NoHoleExists
         
+    }
+    
+    /**
+     Gets the set of holes in list format
+     */
+    public func getAllHoles() -> [Int: Hole] {
+        return scoreCard
     }
     
     
@@ -93,10 +100,10 @@ class Scorecard {
     public func getScore() -> Int {
         if isLocked(){
             if cachedScore != nil {
-                return cachedScore
+                return cachedScore ?? -1
             }
             cachedScore = calculateScore()
-            return cachedScore
+            return cachedScore ?? -1 
         }
         return calculateScore()
         

@@ -12,10 +12,19 @@ struct Shot{
     private let endPos: Position
     private let shotType: ShotType
     
-    init(startPos: Position, endPos: Position, shotType: ShotType) {
+    init(startPos: Position, endPos: Position) {
         self.startPos = startPos
         self.endPos = endPos
-        self.shotType = shotType
+        if startPos.getLie() == Lie.tee {
+            shotType = ShotType.drive
+        } else if startPos.getLie() == Lie.hazard {
+            shotType = ShotType.penalty
+        } else if startPos.getLie() == Lie.green {
+            shotType = ShotType.putt
+        } else {
+            shotType = ShotType.shot
+        }
+        
     }
     
     /**

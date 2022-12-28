@@ -37,7 +37,10 @@ class Golfer{
 //        addToHandicapCalc(differential: roundToAdd.getScorecard().getDifferential())
     }
     
-    // TODO: Do all the stuff for reports
+    
+    
+    // TODO: Do all the stuff for reports:
+    // overload getReport with all possible filters. Also explore the possibility of nested Filter. Think a new filter object
     
     
     

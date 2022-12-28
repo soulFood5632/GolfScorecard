@@ -37,6 +37,8 @@ public struct Position {
             return 0
         case Lie.hazard:
             return 0
+        case Lie.holed:
+            return 0
 
         }
     }
@@ -58,6 +60,7 @@ public struct Position {
 }
 
 public enum Lie {
+    case holed
     case tee
     case fairway
     case rough

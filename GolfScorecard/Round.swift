@@ -11,13 +11,19 @@ class Round {
     
     private var datePlayed: Date
     private var scorecard: Scorecard!
+    private let roundID: UUID
     
     /**
      A round with an explcit date
      */
     init(datePlayed: Date, courseData: (Int, Float, [HoleInfo])){
+        self.roundID = UUID()
         self.datePlayed = datePlayed
         self.scorecard = Scorecard(courseTemplate: courseData)
+    }
+    
+    public func getRoundID() -> UUID {
+        return roundID
     }
     
     /**
@@ -26,6 +32,7 @@ class Round {
     init(courseData: (Int, Float, [HoleInfo])){
         self.datePlayed = Date.now
         self.scorecard = Scorecard(courseTemplate: courseData)
+        self.roundID = UUID()
     }
     
     

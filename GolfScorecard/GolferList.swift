@@ -110,8 +110,9 @@ class GolferList {
                 passwordList.removeValue(forKey: currentUserID)
                 golfers.insert(newUserID)
                 
+            } else {
+                throw RetreivalError.IncorrectPassword
             }
-            throw RetreivalError.IncorrectPassword
         } catch RetreivalError.NoGolferExists {
             throw RetreivalError.NoGolferExists
         }
@@ -126,8 +127,9 @@ class GolferList {
         do {
             if try checkPassword(userID: userID, passwordEntry: currentPassword) {
                 passwordList[userID]!.0 = newPassword
+            } else {
+                throw RetreivalError.IncorrectPassword
             }
-            throw RetreivalError.IncorrectPassword
         } catch RetreivalError.NoGolferExists {
             throw RetreivalError.NoGolferExists
         }

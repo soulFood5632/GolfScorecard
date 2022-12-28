@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct report {
+    
+    private let shotList: [Shot]
+    init(listOfShots: [Shot]){
+        shotList = listOfShots
+    }
+    
+    //TODO: complete all report requests below
+}

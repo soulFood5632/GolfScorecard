@@ -27,7 +27,6 @@
 		02CCDB332956812100A3424F /* TestCreateCourseAndRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB322956812100A3424F /* TestCreateCourseAndRound.swift */; };
 		02CCDB352956842600A3424F /* RetreivalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB342956842600A3424F /* RetreivalError.swift */; };
 		02CCDB3729581FFC00A3424F /* GolferList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB3629581FFC00A3424F /* GolferList.swift */; };
-		02CCDB39295C24C200A3424F /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB38295C24C200A3424F /* Filter.swift */; };
 		02CCDB3B295C24F700A3424F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB3A295C24F700A3424F /* Report.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +72,6 @@
 		02CCDB322956812100A3424F /* TestCreateCourseAndRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCreateCourseAndRound.swift; sourceTree = "<group>"; };
 		02CCDB342956842600A3424F /* RetreivalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetreivalError.swift; sourceTree = "<group>"; };
 		02CCDB3629581FFC00A3424F /* GolferList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolferList.swift; sourceTree = "<group>"; };
-		02CCDB38295C24C200A3424F /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		02CCDB3A295C24F700A3424F /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,7 +139,6 @@
 				02CCDB21294C40CC00A3424F /* Hole.swift */,
 				02CCDB1D294C3EE800A3424F /* Shot.swift */,
 				02CCDB1F294C402A00A3424F /* Position.swift */,
-				02CCDB38295C24C200A3424F /* Filter.swift */,
 				02CCDB3A295C24F700A3424F /* Report.swift */,
 			);
 			path = GolfScorecard;
@@ -311,7 +308,6 @@
 				02CCDB20294C402A00A3424F /* Position.swift in Sources */,
 				02CCDB1A294C251F00A3424F /* Round.swift in Sources */,
 				02CCDB3729581FFC00A3424F /* GolferList.swift in Sources */,
-				02CCDB39295C24C200A3424F /* Filter.swift in Sources */,
 				02CCDB1E294C3EE800A3424F /* Shot.swift in Sources */,
 				02CCDB352956842600A3424F /* RetreivalError.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,

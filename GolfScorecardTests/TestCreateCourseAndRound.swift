@@ -23,12 +23,12 @@ final class TestCreateCourseAndRound: XCTestCase {
 
 
 
-    func testIllegalRequests() throws {
+    func testAIllegalRequests() throws {
         XCTAssertFalse(myDatabase.isCourse(name: "Makai Golf Club"))
         XCTAssertFalse(makaiCourseInfo.doesTeeExist(teeName: "Black"))
     }
     
-    func testAddCourse() throws {
+    func testBAddCourse() throws {
         
         makaiCourseInfo.addTee(name: "Black", slope: 134, rating: 75.4)
         makaiCourseInfo.addTee(name: "Blue", slope: 127, rating: 71.4)
@@ -237,27 +237,71 @@ final class TestCreateCourseAndRound: XCTestCase {
         
     }
     
-    func testMakeGolfer() throws {
+    func testCMakeGolfer() throws {
+        
         XCTAssertTrue(myGolferList.addGolfer(userID: golfer1.0, password: golfer1.1))
         
         XCTAssertThrowsError(try myGolferList.getGolfer(userID: golfer1.0, password: "hello world"))
         XCTAssertThrowsError(try myGolferList.getGolfer(userID: golfer2.0, password: golfer2.0))
         
-        XCTAssertEqual(golfer1.0, try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getName())
         XCTAssertTrue(try abs(myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getHandicap() - 36.0) <= 0.01)
+    
+        let newUserID = "Jack"
+        let newPword = "helloToTheOtherSide"
+        
+        try myGolferList.changeUserID(currentUserID: golfer1.0, newUserID: newUserID, password: golfer1.1)
+        
+        
+        XCTAssertThrowsError(try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1))
+        XCTAssertThrowsError(try myGolferList.changePassword(userID: golfer1.0, currentPassword: golfer1.1, newPassword: "Hugs"))
+        
+        try myGolferList.changePassword(userID: newUserID, currentPassword: golfer1.1, newPassword: newPword)
+        try myGolferList.changeUserID(currentUserID: newUserID, newUserID: golfer1.0, password: newPword)
+        
+        XCTAssertThrowsError(try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1))
+        XCTAssertNoThrow(try myGolferList.getGolfer(userID: golfer1.0, password: newPword))
+        XCTAssertNoThrow(try myGolferList.changePassword(userID: golfer1.0, currentPassword: newPword, newPassword: golfer1.1))
+        
+        XCTAssertTrue(myGolferList.addGolfer(userID: golfer2.0, password: golfer2.1))
+        XCTAssertTrue(myGolferList.addGolfer(userID: golfer3.0, password: golfer3.1))
+        
+        
+        
+        
     }
     
-    func testChangeGolfer() throws {
-        var golferData = try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1)
+    func testDMakeMoreGolfers() throws {
+        var round1 = Round(courseData: try makaiCourseInfo.getTeeData(name: "Black"))
         
-        golferData.changeName(newName: "Logan")
+        var myCard = round1.getScorecard()
+        
+        var holesList = myCard.getAllHoles()
+        
+        for (_, hole) in holesList {
+            
+            var shot = Shot(startPos: Position(distance: hole.getHoleInfo().getYardage(), lieType: Lie.tee), endPos: Position(distance: 231, lieType: Lie.fairway))
+            hole.addShot(shotToAdd: shot)
+            
+            shot = Shot(startPos: Position(distance: 231, lieType: Lie.fairway), endPos: Position(distance: 13, lieType: Lie.bunker))
+            hole.addShot(shotNum: 2, shotToAdd: shot)
+            
+            shot = Shot(startPos: Position(distance: 13, lieType: Lie.bunker), endPos: Position(distance: 5, lieType: Lie.green))
+            hole.addShot(shotNum: 3, shotToAdd: shot)
+            
+            shot = Shot(startPos: Position(distance: 5, lieType: Lie.green), endPos: Position(distance: 0, lieType: Lie.holed))
+            hole.addShot(shotToAdd: shot)
+            
+        }
         
         
         
-        XCTAssertEqual(golfer1.0, try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getName())
-        XCTAssertTrue(try abs(myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getHandicap() - 36.0) <= 0.01)
+        
         
     }
+    
+    
+    
+    
     
     
     

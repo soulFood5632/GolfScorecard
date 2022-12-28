@@ -87,6 +87,8 @@ class Hole {
         return holeInfo
     }
     
+    //TODO: Add functionality for streamlined positional entry
+    
     
     
 }
