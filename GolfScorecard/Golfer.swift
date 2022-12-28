@@ -8,15 +8,36 @@
 import Foundation
 
 class Golfer{
-    private var userID: String
-    private var handicap : Double
+    private var handicap: Double
+    private var roundList: [Round]
+    private var differentialList: [Double]
     
     private let DEFAULT_HANDICAP: Double = 36.0
     
-    init(name: String) {
-        self.userID = name
+    init() {
         self.handicap = DEFAULT_HANDICAP
+        roundList = [Round]()
+        differentialList = [Double]()
     }
+    
+    
+    
+    /**
+     Gets the handicap of this user
+     */
+    public func getHandicap() -> Double {
+        return handicap
+    }
+    
+    /**
+     Adds a round to the user's history
+     */
+    public func addRound(roundToAdd: Round) {
+        roundList.append(roundToAdd)
+//        addToHandicapCalc(differential: roundToAdd.getScorecard().getDifferential())
+    }
+    
+    // TODO: Do all the stuff for reports
     
     
     

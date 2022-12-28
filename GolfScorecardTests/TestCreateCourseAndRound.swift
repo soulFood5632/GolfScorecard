@@ -15,7 +15,11 @@ final class TestCreateCourseAndRound: XCTestCase {
     private let myDatabase = CourseDatabase()
     private var makaiCourseInfo = CourseInfo()
     
-    private var myGolfer: Golfer!
+    private var myGolferList = GolferList()
+    
+    private let golfer1 = ("Logan", "Tyrell123")
+    private let golfer2 = ("Niklas", "YellowPig21")
+    private let golfer3 = ("Hudson", "GreenMarmot")
 
 
 
@@ -227,7 +231,6 @@ final class TestCreateCourseAndRound: XCTestCase {
         XCTAssertTrue(myDatabase.isCourse(name: "Makai Golf Club"))
         XCTAssertTrue(makaiCourseInfo.doesTeeExist(teeName: "Black"))
         XCTAssertTrue(makaiCourseInfo.doesTeeExist(teeName: "Blue"))
-        var testHoleInfo = try myDatabase.getCourse(name: "Makai Golf Club").getHoleData(name: "Blue", holeNum: 18)
         XCTAssertEqual(HoleInfo(par: 5, yardage: 534), try myDatabase.getCourse(name: "Makai Golf Club").getHoleData(name: "Blue", holeNum: 18))
         XCTAssertEqual(HoleInfo(par: 3, yardage: 155), try myDatabase.getCourse(name: "Makai Golf Club").getHoleData(name: "White", holeNum: 7))
         XCTAssertEqual(HoleInfo(par: 4, yardage: 476), try myDatabase.getCourse(name: "Makai Golf Club").getHoleData(name: "Black", holeNum: 17))
@@ -235,34 +238,30 @@ final class TestCreateCourseAndRound: XCTestCase {
     }
     
     func testMakeGolfer() throws {
-        myGolfer = Golfer(name: "Logan")
+        XCTAssertTrue(myGolferList.addGolfer(userID: golfer1.0, password: golfer1.1))
+        
+        XCTAssertThrowsError(try myGolferList.getGolfer(userID: golfer1.0, password: "hello world"))
+        XCTAssertThrowsError(try myGolferList.getGolfer(userID: golfer2.0, password: golfer2.0))
+        
+        XCTAssertEqual(golfer1.0, try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getName())
+        XCTAssertTrue(try abs(myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getHandicap() - 36.0) <= 0.01)
+    }
+    
+    func testChangeGolfer() throws {
+        var golferData = try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1)
+        
+        golferData.changeName(newName: "Logan")
+        
+        
+        
+        XCTAssertEqual(golfer1.0, try myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getName())
+        XCTAssertTrue(try abs(myGolferList.getGolfer(userID: golfer1.0, password: golfer1.1).getHandicap() - 36.0) <= 0.01)
+        
     }
     
     
     
-    func testModifyHole() throws {
-        var hole1 = HoleInfo(par: 4, yardage: 450)
-        
-        hole1.updateYardage(newYardage: 400)
-        
-        XCTAssertEqual(400, hole1.getYardage())
-        
-        hole1.updatePar(newPar: 5)
-        
-        XCTAssertEqual(5, hole1.getPar())
-        
-        XCTAssertEqual(400 , hole1.getHoleInfo().1)
-        
-        XCTAssertEqual(5, hole1.getHoleInfo().0)
-        
-        var myInfo = hole1.getHoleInfo()
-        
-        myInfo = (3, 175)
-        
-        XCTAssertEqual(400 , hole1.getHoleInfo().1)
-        
-        XCTAssertEqual(5, hole1.getHoleInfo().0)
-    }
+    
 
 }
 

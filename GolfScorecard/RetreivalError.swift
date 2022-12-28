@@ -13,4 +13,6 @@ public enum RetreivalError: Error{
     case CourseNotFound
     case NoTeeExists
     case NoHoleExists
+    case NoGolferExists
+    case IncorrectPassword
 }

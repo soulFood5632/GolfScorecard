@@ -51,9 +51,9 @@ class Round {
         self.scorecard = newCard
     }
     
-    /*
-     More on reports below
-     */
+    
+     // TODO: More on reports below
+
     
     
     
