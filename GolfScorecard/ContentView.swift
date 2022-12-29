@@ -13,10 +13,19 @@ struct LoginView: View {
     
     
     var body: some View {
-        TextField("User ID", text: $userID)
-            .onSubmit {
+        VStack {
+            
+            TextField("User ID", text: $userID)
+                .onSubmit {
+                    
+                }
+                .padding()
+            
                 
-            }
+            
+            
+            
+        }
     }
 }
 
