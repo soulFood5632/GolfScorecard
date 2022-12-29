@@ -28,8 +28,18 @@ struct LoginView: View {
                 
                 //TODO: ADD 40 yards left image
                 
+                Text("Please Login Below")
+                    .font(.title3)
+                    .padding(.top, 60)
+                    
+                Image(systemName: "arrow.down")
+                    .padding(.top, 10)
+                    .padding(.bottom, 65)
+                    //TODO: Add animation
                 
-                Spacer()
+                
+                
+                
                 
                 TextField("User ID", text: $userID)
                     
