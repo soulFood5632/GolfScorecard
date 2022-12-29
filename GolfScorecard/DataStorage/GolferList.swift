@@ -139,3 +139,16 @@ class GolferList {
     
     
 }
+
+extension GolferList {
+    
+    struct GolferInfo {
+        var userID: String = ""
+        var password: String = ""
+    
+    }
+    
+    var golferData: GolferInfo {
+        GolferInfo()
+    }
+}

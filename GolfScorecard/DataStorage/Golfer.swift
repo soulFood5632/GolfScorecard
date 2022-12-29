@@ -62,3 +62,7 @@ class Golfer{
     
     
 }
+
+extension Golfer {
+    static let sampleGolfer = Golfer()
+}
