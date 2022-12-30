@@ -33,20 +33,18 @@ struct LoginView: View {
                     .padding(.top, 60)
                     
                 Image(systemName: "arrow.down")
-                    .padding(.top, 10)
-                    .padding(.bottom, 65)
-                    //TODO: Add animation
+                    .padding(.top, 3)
+                    .padding(.bottom, 75)
                 
-                
-                
-                
+        
                 
                 TextField("User ID", text: $userID)
+                    .textFieldStyle(.roundedBorder)
                     
                     .padding(.leading)
                     .padding(.trailing)
                     .padding(.bottom)
-                    .textFieldStyle(.roundedBorder)
+                    
                     
                 
                 Button ("Check User ID") {

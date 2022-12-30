@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct EditRoundView: View {
+struct ListEditView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct EditRoundView_Previews: PreviewProvider {
+struct ListEditView_Preview: PreviewProvider {
     static var previews: some View {
-        EditRoundView()
+        ListEditView()
     }
 }

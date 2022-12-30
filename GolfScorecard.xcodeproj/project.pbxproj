@@ -32,8 +32,10 @@
 		02CCDB8A295D653D00A3424F /* GolferHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB89295D653D00A3424F /* GolferHomePage.swift */; };
 		02CCDB8C295D681100A3424F /* ManageRoundsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB8B295D681100A3424F /* ManageRoundsView.swift */; };
 		02CCDB8E295D69FE00A3424F /* NewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB8D295D69FE00A3424F /* NewAccountView.swift */; };
-		02CCDB90295D6D4200A3424F /* AddRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB8F295D6D4200A3424F /* AddRoundView.swift */; };
-		02CCDB93295D6D7800A3424F /* EditRoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB92295D6D7800A3424F /* EditRoundView.swift */; };
+		02CCDB90295D6D4200A3424F /* AddRoundSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB8F295D6D4200A3424F /* AddRoundSetupView.swift */; };
+		02CCDB93295D6D7800A3424F /* ListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB92295D6D7800A3424F /* ListEditView.swift */; };
+		02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB94295E65D100A3424F /* RoundEditView.swift */; };
+		02CCDB97295E788F00A3424F /* RoundOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB96295E788F00A3424F /* RoundOverviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +85,10 @@
 		02CCDB89295D653D00A3424F /* GolferHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolferHomePage.swift; sourceTree = "<group>"; };
 		02CCDB8B295D681100A3424F /* ManageRoundsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageRoundsView.swift; sourceTree = "<group>"; };
 		02CCDB8D295D69FE00A3424F /* NewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountView.swift; sourceTree = "<group>"; };
-		02CCDB8F295D6D4200A3424F /* AddRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoundView.swift; sourceTree = "<group>"; };
-		02CCDB92295D6D7800A3424F /* EditRoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRoundView.swift; sourceTree = "<group>"; };
+		02CCDB8F295D6D4200A3424F /* AddRoundSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoundSetupView.swift; sourceTree = "<group>"; };
+		02CCDB92295D6D7800A3424F /* ListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditView.swift; sourceTree = "<group>"; };
+		02CCDB94295E65D100A3424F /* RoundEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundEditView.swift; sourceTree = "<group>"; };
+		02CCDB96295E788F00A3424F /* RoundOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundOverviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +144,10 @@
 				02CCDB8D295D69FE00A3424F /* NewAccountView.swift */,
 				02CCDB89295D653D00A3424F /* GolferHomePage.swift */,
 				02CCDB8B295D681100A3424F /* ManageRoundsView.swift */,
-				02CCDB8F295D6D4200A3424F /* AddRoundView.swift */,
-				02CCDB92295D6D7800A3424F /* EditRoundView.swift */,
+				02CCDB8F295D6D4200A3424F /* AddRoundSetupView.swift */,
+				02CCDB92295D6D7800A3424F /* ListEditView.swift */,
+				02CCDB94295E65D100A3424F /* RoundEditView.swift */,
+				02CCDB96295E788F00A3424F /* RoundOverviewView.swift */,
 				02CCDAF2294C24E600A3424F /* Assets.xcassets */,
 				02CCDAF7294C24E600A3424F /* GolfScorecard.entitlements */,
 				02CCDAF4294C24E600A3424F /* Preview Content */,
@@ -329,6 +335,7 @@
 			files = (
 				02CCDB8C295D681100A3424F /* ManageRoundsView.swift in Sources */,
 				02CCDB8E295D69FE00A3424F /* NewAccountView.swift in Sources */,
+				02CCDB97295E788F00A3424F /* RoundOverviewView.swift in Sources */,
 				02CCDB22294C40CC00A3424F /* Hole.swift in Sources */,
 				02CCDB28294D9A3000A3424F /* HoleInfo.swift in Sources */,
 				02CCDB1C294C25A000A3424F /* Scorecard.swift in Sources */,
@@ -338,10 +345,11 @@
 				02CCDB1A294C251F00A3424F /* Round.swift in Sources */,
 				02CCDB3729581FFC00A3424F /* GolferList.swift in Sources */,
 				02CCDB1E294C3EE800A3424F /* Shot.swift in Sources */,
-				02CCDB93295D6D7800A3424F /* EditRoundView.swift in Sources */,
+				02CCDB93295D6D7800A3424F /* ListEditView.swift in Sources */,
 				02CCDB352956842600A3424F /* RetreivalError.swift in Sources */,
+				02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,
-				02CCDB90295D6D4200A3424F /* AddRoundView.swift in Sources */,
+				02CCDB90295D6D4200A3424F /* AddRoundSetupView.swift in Sources */,
 				02CCDB3D295CEC3200A3424F /* Filter.swift in Sources */,
 				02CCDB3B295C24F700A3424F /* Report.swift in Sources */,
 				02CCDB26294D8F5900A3424F /* CourseInfo.swift in Sources */,

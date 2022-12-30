@@ -132,4 +132,209 @@ public class CourseInfo{
     
 }
 
+extension CourseInfo {
+    
+    
+    
+    static var sampleCourseInfo: CourseInfo {
+        var makaiCourseInfo = CourseInfo()
+        
+        makaiCourseInfo.addTee(name: "Black", slope: 134, rating: 75.4)
+        makaiCourseInfo.addTee(name: "Blue", slope: 127, rating: 71.4)
+        makaiCourseInfo.addTee(name: "White", slope: 125, rating: 69.6)
+        
+        var teeData = [(Int, [Int])]()
+        
+        var holeData = [Int]()
+        
+        //Hole 1
+        
+        holeData.append(464)
+        holeData.append(427)
+        holeData.append(397)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 2
+        
+        holeData = [Int]()
+        
+        holeData.append(611)
+        holeData.append(570)
+        holeData.append(549)
+        
+        teeData.append((5, holeData))
+        
+        //Hole 3
+        
+        holeData = [Int]()
+        
+        holeData.append(181)
+        holeData.append(153)
+        holeData.append(150)
+        
+        teeData.append((3, holeData))
+        
+        //Hole 4
+        
+        holeData = [Int]()
+        
+        holeData.append(385)
+        holeData.append(334)
+        holeData.append(312)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 5
+        
+        holeData = [Int]()
+        
+        holeData.append(540)
+        holeData.append(500)
+        holeData.append(479)
+        
+        teeData.append((5, holeData))
+        
+        //Hole 6
+        
+        holeData = [Int]()
+        
+        holeData.append(446)
+        holeData.append(409)
+        holeData.append(395)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 7
+        
+        holeData = [Int]()
+        
+        holeData.append(213)
+        holeData.append(173)
+        holeData.append(155)
+        
+        teeData.append((3, holeData))
+        
+        //Hole 8
+        
+        holeData = [Int]()
+        
+        holeData.append(359)
+        holeData.append(294)
+        holeData.append(278)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 9
+        
+        holeData = [Int]()
+        
+        holeData.append(403)
+        holeData.append(368)
+        holeData.append(346)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 10
+        
+        holeData = [Int]()
+        
+        holeData.append(399)
+        holeData.append(363)
+        holeData.append(346)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 11
+        
+        holeData = [Int]()
+        
+        holeData.append(520)
+        holeData.append(479)
+        holeData.append(462)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 12
+        
+        holeData = [Int]()
+        
+        holeData.append(450)
+        holeData.append(440)
+        holeData.append(420)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 13
+        
+        holeData = [Int]()
+        
+        holeData.append(255)
+        holeData.append(198)
+        holeData.append(175)
+        
+        teeData.append((3, holeData))
+        
+        //Hole 14
+        
+        holeData = [Int]()
+        
+        holeData.append(338)
+        holeData.append(292)
+        holeData.append(288)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 15
+        
+        holeData = [Int]()
+        
+        holeData.append(414)
+        holeData.append(355)
+        holeData.append(342)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 16
+        
+        holeData = [Int]()
+        
+        holeData.append(202)
+        holeData.append(197)
+        holeData.append(171)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 17
+        
+        holeData = [Int]()
+        
+        holeData.append(476)
+        holeData.append(410)
+        holeData.append(370)
+        
+        teeData.append((4, holeData))
+        
+        //Hole 18
+        
+        holeData = [Int]()
+        
+        holeData.append(567)
+        holeData.append(534)
+        holeData.append(505)
+        
+        teeData.append((5, holeData))
+        
+        
+        let teekey = ["Black", "Blue", "White"]
+        do {
+            try makaiCourseInfo.bulkHoleInfoAdd(teeNamesKey: teekey, holeData: teeData)
+        } catch {
+            fatalError("tee names checking error ")
+        }
+        
+        return makaiCourseInfo
+    }
+}
+
 

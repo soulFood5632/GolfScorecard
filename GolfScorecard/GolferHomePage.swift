@@ -10,24 +10,46 @@ import SwiftUI
 struct GolferHomePage: View {
     
     let golfer: Golfer
+    @State private var isLoggingOut = false
     
     var body: some View {
         NavigationView {
+            
+
+            
             List {
                 
-                NavigationLink(destination: ManageRoundsView()) {
+
+                
+                NavigationLink(destination: ManageRoundsView(listOfRounds: golfer.getRounds())) {
                     Text("Manage Rounds")
-                        .font(.title3)
                 }
                 
                 
                 
                 
                 
+                
             }
+            .toolbar(content: {
+                ToolbarItem (placement: .bottomBar) {
+                    NavigationLink("Log Out", destination: LoginView())
+                        .bold()
+                        .foregroundColor(.red)
+                }
+                ToolbarItem (placement: .primaryAction) {
+                    Button(action: {
+                        //TODO: Add menu of itemrs
+                    }) {
+                        Image(systemName: "ellipsis")
+                    }
+                }
+            })
+            
+            .navigationTitle("Home")
             
         }
-        .navigationTitle("Home")
+        
         
     }
 }

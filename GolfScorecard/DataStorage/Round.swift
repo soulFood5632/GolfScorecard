@@ -65,3 +65,38 @@ class Round {
     
     
 }
+
+extension Round {
+    static var exampleRound: Round {
+        var round2: Round
+        do {
+            round2 = Round(courseData: try CourseInfo.sampleCourseInfo.getTeeData(name: "Black"))
+        } catch {
+            fatalError("Busted tee Collection in extension Round")
+        }
+        var myCard = round2.getScorecard()
+        var holesList = myCard.getAllHoles()
+        
+        
+        
+        for (_, hole) in holesList {
+            
+            var journey = [Position]()
+            
+            journey.append(hole.getHoleInfo().getStartPosition())
+            journey.append(Position(distance: 210, lieType: Lie.recovery))
+            journey.append(Position(distance: 123, lieType: Lie.bunker))
+            journey.append(Position(distance: 4, lieType: Lie.green))
+            
+            hole.postionalBasedShotEntry(positionList: journey)
+        
+            
+        }
+        
+        myCard.lockRound()
+        
+        round2.updateScorecard(newCard: myCard)
+        
+        return round2
+    }
+}
