@@ -16,6 +16,7 @@ struct NewAccountView: View {
         NavigationView {
             VStack {
                 
+                
                 Form {
                     Section(header: Text("Username")) {
                         TextField("Enter User ID", text: $username)
@@ -30,8 +31,7 @@ struct NewAccountView: View {
                     
                 }
                 
-                
-                
+            
                 
                 
                 NavigationLink(destination: LoginView()) {
@@ -57,13 +57,14 @@ struct NewAccountView: View {
         .navigationBarBackButtonHidden()
         
         
+        
+        
+        
     }
-
     
-}
-
-struct NewAccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewAccountView()
+    struct NewAccountView_Previews: PreviewProvider {
+        static var previews: some View {
+            NewAccountView()
+        }
     }
 }

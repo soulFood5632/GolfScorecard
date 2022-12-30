@@ -11,6 +11,7 @@ struct Shot: Equatable{
     private let startPos: Position
     private let endPos: Position
     private let shotType: ShotType
+    private let penalty: Penalty
     
     init(startPos: Position, endPos: Position) {
         self.startPos = startPos
@@ -18,12 +19,54 @@ struct Shot: Equatable{
         if startPos.getLie() == Lie.tee {
             shotType = ShotType.drive
         } else if startPos.getLie() == Lie.hazard {
-            shotType = ShotType.penalty
+            fatalError("Hazard Lie is not a valid start Position")
         } else if startPos.getLie() == Lie.green {
             shotType = ShotType.putt
         } else {
             shotType = ShotType.shot
         }
+        
+        penalty = Penalty.NoPenalty
+        
+    }
+    
+    
+    init(startPos: Position, endPos: Position, penaltyType: Penalty) {
+        self.startPos = startPos
+        self.endPos = endPos
+        switch startPos.getLie() {
+        case Lie.tee:
+            if startPos.getDistance() > 255 { //cutoff for what is a tee shot
+                shotType = ShotType.drive
+            } else {
+                shotType = ShotType.approach
+            }
+            break
+        case Lie.fairway:
+            if startPos.getDistance() > 50 { //cuttoff for approach shot
+                shotType = ShotType.approach
+            } else {
+                shotType = ShotType.chip
+            }
+            break
+        case Lie.bunker:
+            if startPos.getDistance() > 50 { //cuttoff for approach shot
+                shotType = ShotType.approach
+            } else {
+                shotType = ShotType.sand
+            }
+            break
+        case Lie.hazard:
+            fatalError("No start posotion to a swing can be in a hazard")
+        case Lie.holed:
+            fatalError("No start position can be in the hole")
+            
+        
+        
+        
+        }
+        
+        self.penalty = penaltyType
         
     }
     
@@ -86,7 +129,8 @@ struct Shot: Equatable{
 
 public enum ShotType{
     case drive
-    case shot
+    case approach
+    case chip
+    case sand
     case putt
-    case penalty
 }

@@ -36,6 +36,7 @@
 		02CCDB93295D6D7800A3424F /* ListEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB92295D6D7800A3424F /* ListEditView.swift */; };
 		02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB94295E65D100A3424F /* RoundEditView.swift */; };
 		02CCDB97295E788F00A3424F /* RoundOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB96295E788F00A3424F /* RoundOverviewView.swift */; };
+		02CCDB9B295E9FDF00A3424F /* Penalty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB9A295E9FDF00A3424F /* Penalty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		02CCDB92295D6D7800A3424F /* ListEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListEditView.swift; sourceTree = "<group>"; };
 		02CCDB94295E65D100A3424F /* RoundEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundEditView.swift; sourceTree = "<group>"; };
 		02CCDB96295E788F00A3424F /* RoundOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundOverviewView.swift; sourceTree = "<group>"; };
+		02CCDB9A295E9FDF00A3424F /* Penalty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Penalty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				02CCDB21294C40CC00A3424F /* Hole.swift */,
 				02CCDB1D294C3EE800A3424F /* Shot.swift */,
 				02CCDB1F294C402A00A3424F /* Position.swift */,
+				02CCDB9A295E9FDF00A3424F /* Penalty.swift */,
 				02CCDB3A295C24F700A3424F /* Report.swift */,
 				02CCDB3C295CEC3200A3424F /* Filter.swift */,
 			);
@@ -350,6 +353,7 @@
 				02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,
 				02CCDB90295D6D4200A3424F /* AddRoundSetupView.swift in Sources */,
+				02CCDB9B295E9FDF00A3424F /* Penalty.swift in Sources */,
 				02CCDB3D295CEC3200A3424F /* Filter.swift in Sources */,
 				02CCDB3B295C24F700A3424F /* Report.swift in Sources */,
 				02CCDB26294D8F5900A3424F /* CourseInfo.swift in Sources */,

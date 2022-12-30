@@ -58,6 +58,10 @@ class Round {
         self.scorecard = newCard
     }
     
+    public func getDate() -> Date {
+        return datePlayed
+    }
+    
     
      // TODO: More on reports below
 

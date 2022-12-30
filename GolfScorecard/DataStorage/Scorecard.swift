@@ -17,6 +17,7 @@ class Scorecard {
     
     private var cachedScore: Int?
     private var cachedShots: [Shot]?
+    private var cachedPar: Int?
     
     
     
@@ -95,10 +96,10 @@ class Scorecard {
     
     
     /**
-     Finds the score of the player over the 18 holes
+     Finds the score of the player over the total round
      */
     public func getScore() -> Int {
-        if isLocked(){
+        if isLocked() {
             if cachedScore != nil {
                 return cachedScore ?? -1
             }
@@ -108,6 +109,38 @@ class Scorecard {
         return calculateScore()
         
     }
+    
+    
+    /**
+     Finds the par of this round
+     */
+    public func getPar() -> Int {
+        if isLocked() {
+            if cachedPar != nil {
+                return cachedPar ?? -1
+            }
+            cachedPar = calculatePar()
+            return cachedPar ?? -1
+        }
+        return calculatePar()
+    }
+    
+    /**
+     Caculates the par of this round
+     */
+    private func calculatePar() -> Int {
+        var totalPar = 0
+        for (_, holeEntry) in scoreCard {
+            totalPar += holeEntry.getHoleInfo().getPar()
+        }
+        return totalPar
+    }
+    
+    public func getScoreToPar() -> Int {
+        return getScore() - getPar()
+    }
+    
+    
     
     
     /**

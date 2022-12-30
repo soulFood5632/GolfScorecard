@@ -15,24 +15,30 @@ struct ManageRoundsView: View {
             VStack {
                 
                 List {
-                    Section(header: Text("Add")) {
-                        NavigationLink(destination: AddRoundSetupView()) {
-                            Label("Add Round", systemImage: "pencil.line")
-                                .font(.headline)
-                        }
+                    
+                    NavigationLink(destination: AddRoundSetupView()) {
+                        Label("Add Round", systemImage: "plus.circle.fill")
+                            .font(.headline)
+                            .padding(10)
                     }
-                    Section(header: Text("Edit")) {
-                        NavigationLink(destination: ListEditView()) {
-                            Label("View/Edit Rounds", systemImage: "pencil")
-                                .font(.headline)
-                        }
-                        
+                
+                    
+                    
+                    NavigationLink(destination: ListEditView()) {
+                        Label("Edit/Delete Rounds", systemImage: "pencil")
+                            .font(.headline)
+                            .padding(10)
                     }
+                    
                     
                 }
                 .navigationTitle("Manage Rounds")
                 
-                if(listOfRounds.isEmpty){
+                
+                VStack {
+                    if(listOfRounds.isEmpty){
+                        Text("You have no rounds")
+                    }
                     
                 }
             }
