@@ -23,7 +23,7 @@ struct GolferHomePage: View {
                     .multilineTextAlignment(.center)
                 
                 
-                //TODO: add a horizontal line here
+                Divider()
                     
                 
                 
@@ -58,6 +58,7 @@ struct GolferHomePage: View {
                                 .fill(.red)
                                 .opacity(0.2)
                                 .padding()
+                                
                             
                             
                             

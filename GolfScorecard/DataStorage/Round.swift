@@ -198,8 +198,8 @@ class Round {
         return getScore() - getPar()
     }
     
-    public func getTotalYardage() {
-        
+    public func getTotalYardage() -> Int {
+        return holeList.map { $0.value.getYardage()}.reduce(0) { $0 + $1 }
     }
     
     
@@ -209,7 +209,7 @@ class Round {
      Calculates the score of the round given the current state.
      */
     private func calculateScore() -> Int {
-        var totalScore = 0
+//        var totalScore = 0
         return holeList.map{$0.value.getScore()}.reduce(0) { $0 + $1 }
         //TODO: check to make sure that works
 //        for (_, holeEntry) in holeList {
@@ -295,9 +295,9 @@ class Round {
 extension Round {
     static var exampleRound: Round {
         do {
-            var myRound = try Round(course: Course.sampleCourseInfo, teeName: Course.sampleCourseInfo.getTeeNames()[0])
+            let myRound = try Round(course: Course.sampleCourseInfo, teeName: Course.sampleCourseInfo.getTeeNames()[0])
             
-            var listOfPositions = [Position(distance: 243, lieType: Lie.tee), Position(distance: 123, lieType: Lie.bunker), Position(distance: 6, lieType: Lie.green), Position(distance: 1, lieType: Lie.green)]
+            let listOfPositions = [Position(distance: 243, lieType: Lie.tee), Position(distance: 123, lieType: Lie.bunker), Position(distance: 6, lieType: Lie.green), Position(distance: 1, lieType: Lie.green)]
             
             for i in 1...18 {
                 try myRound.addShotsToHole(listOfPositions: listOfPositions, holeNum: i)
