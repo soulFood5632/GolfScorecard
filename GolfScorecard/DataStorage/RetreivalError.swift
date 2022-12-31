@@ -15,4 +15,5 @@ public enum RetreivalError: Error{
     case NoHoleExists
     case NoGolferExists
     case IncorrectPassword
+    case NoRoundExists
 }

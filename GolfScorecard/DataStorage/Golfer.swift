@@ -10,17 +10,18 @@ import Foundation
 class Golfer {
     private var handicap: Double?
     private var roundList: [Round]
-    private var differentialList: [(Double, Date)]
+    private var courseMap: [Course: Int]
     public var nickname: String
     public var password: String
     public var userID: String
     
     private let DEFAULT_HANDICAP: Double = 36.0
+    private var mostPopularCourse: Course?
     
     init(userID: String, nickname: String, password: String) {
         self.handicap = DEFAULT_HANDICAP
         roundList = [Round]()
-        differentialList = [(Double, Date)]()
+        courseMap = [Course: Int]()
         self.nickname = nickname
         self.password = password
         self.userID = userID
@@ -46,12 +47,110 @@ class Golfer {
     }
     
     /**
-     Adds a round to the user's history
+     Gets a round of a particular ID. Throws a roundNotFound exception if a round
+     of that ID does not exist
      */
-    public func addRound(roundToAdd: Round) {
+    public func getRound(roundID: UUID) throws -> Round {
+        if doesRoundExist(roundID: roundID) {
+            return roundList.filter( {$0.getRoundID() == roundID})[0]
+        }
+        throw RetreivalError.NoRoundExists
+    }
+    
+    /**
+     Adds a round to the user's history. Returns false if the round has already been added.
+     */
+    public func addRound(roundToAdd: Round) -> Bool {
+        if doesRoundExist(roundToCheck: roundToAdd) {
+            return false
+        }
         roundList.append(roundToAdd)
-        differentialList.append((roundToAdd.getDifferential(), roundToAdd.getDate()))
+        resetCache()
+        
+        if let _ = courseMap[roundToAdd.getCourse()] {
+            courseMap[roundToAdd.getCourse()]! += 1
+        }
+        
+        courseMap[roundToAdd.getCourse()] = 1
+        
+        return true
+    }
+    
+    
+    /**
+     Checks to see if a round of the same ID already exists in this golfer
+     */
+    private func doesRoundExist(roundToCheck: Round) -> Bool {
+        return roundList.contains(where: { round in return round.getRoundID() == roundToCheck.getRoundID()})
+    }
+    
+    /**
+     Checks to see if a id of the given round already exists in this golfer
+     */
+    private func doesRoundExist(roundID: UUID) -> Bool {
+        return roundList.contains(where: { round in return round.getRoundID() == roundID})
+    }
+    
+    /**
+     Removes a round based on its ID, returns false if the ID does
+     not exist in this round
+     */
+    public func removeRound(roundID: UUID) -> Bool {
+        if doesRoundExist(roundID: roundID) {
+            var courseToRemove: Course
+            do {
+                 courseToRemove = try getRound(roundID: roundID).getCourse()
+            } catch {
+                fatalError("Round has been confirmed to exist and then has been comfirmed to not in the same function")
+            }
+            roundList.removeAll(where: { $0.getRoundID() == roundID})
+            
+            courseMap[courseToRemove]! -= 1
+            
+            if courseMap[courseToRemove]! == 0 {
+                courseMap.removeValue(forKey: courseToRemove)
+            }
+            
+            return true
+            
+            
+        } else {
+            return false
+        }
+        
+    }
+    
+    /**
+     Removes the round from this user. returns false if this round did not exist
+     */
+    public func removeRound(round: Round) -> Bool {
+        if doesRoundExist(roundToCheck: round) {
+            var courseToRemove = round.getCourse()
+            
+            roundList.removeAll(where: { $0.getRoundID() == round.getRoundID()})
+            
+            courseMap[courseToRemove]! -= 1
+            
+            if courseMap[courseToRemove]! == 0 {
+                courseMap.removeValue(forKey: courseToRemove)
+            }
+            
+            return true
+            
+            
+        } else {
+            return false
+        }
+    }
+    
+    
+    /**
+     Resets all cached properties
+     */
+    private func resetCache() {
         handicap = nil
+        mostPopularCourse = nil
+        
     }
     
     /**
@@ -61,36 +160,47 @@ class Golfer {
         if handicap != nil {
             return handicap ?? DEFAULT_HANDICAP
         }
-        differentialList.sort(by: { (element1, element2) in return Golfer.compareDate(element1: element1, element2: element2) }) //sorts the elements in the differential list
+        var differentialList = [(Double, Date)]()
+        
+        for round in self.roundList {
+            differentialList.append((round.getDifferential(), round.getDate()))
+        }
+        
+        differentialList = differentialList.sorted(by: { (element1, element2) in return Golfer.compareDate(element1: element1, element2: element2) }) //sorts the elements in the differential list
+        
+        var currentHandicap: Double
         switch differentialList.count {
         case 0, 1, 2:
-            return DEFAULT_HANDICAP
+            currentHandicap = DEFAULT_HANDICAP
         case 3:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 1)) - 2
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 1)) - 2
         case 4:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 1)) - 1
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 1)) - 1
         case 5:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 1))
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 1))
         case 6:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 2)) - 1
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 2)) - 1
         case 7, 8:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 2))
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 2))
         case 9, 10, 11:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 3))
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 3))
         case 12, 13, 14:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 4))
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 4))
         case 15, 16:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 5))
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 5))
         case 17, 18:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 6))
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 6))
         case 19:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 7))
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList, howManyScores: 7))
         default:
-            return Golfer.getAverageOfList(list: getTopNDifferentials(howManyScores: 8))
-            
-            
-            
+            currentHandicap = Golfer.getAverageOfList(list: Golfer.getTopNDifferentials(differentialList: differentialList,howManyScores: 8))
+            break
         }
+            
+        
+        handicap = currentHandicap
+        
+        return currentHandicap
         
     }
     
@@ -105,7 +215,7 @@ class Golfer {
      Gets the top N differntials from the given list. If the differntial list's
      size is greater than 20 it will cut off to the most recent rounds.
      */
-    private func getTopNDifferentials(howManyScores: Int) -> [Double] {
+    private static func getTopNDifferentials(differentialList: [(Double, Date)], howManyScores: Int) -> [Double] {
         var updatedList = differentialList
         if updatedList.count > 20 {
             updatedList.remove(atOffsets: IndexSet(20...updatedList.count - 1))
@@ -160,13 +270,33 @@ class Golfer {
      */
     
     public func getNumberOfCourses() -> Int {
-        return Set(roundList.map{ round in round.getCourseName() }).count
+        return Set(roundList.map{ round in round.getCourse() }).count
     }
     
+    /**
+     Gets the most common course played. Requires that this golfer has played a
+     course. If two courses are tied it returns a rondom course
+     */
+    
     public func getMostCommonCourse() -> Course {
-        return Course.sampleCourseInfo
-        //TODO: implement this method
+        if mostPopularCourse != nil {
+            return mostPopularCourse ?? Course.sampleCourseInfo
+        }
+        var mostCommonCourse: Course? = nil
+        var currentMaxFrequency = 0
+        for (course, frequency) in courseMap {
+            if frequency > currentMaxFrequency {
+                mostCommonCourse = course
+                currentMaxFrequency = frequency
+            }
+            
+        }
+        
+        mostPopularCourse = mostCommonCourse
+        return mostCommonCourse ?? Course.sampleCourseInfo
     }
+    
+    
     
     
     /**
@@ -204,7 +334,7 @@ class Golfer {
 
 extension Golfer {
     static var sampleGolfer: Golfer {
-        var myGolfer = Golfer(userID: "loganu13", nickname: "Logan Underwood", password: "Magenta^2")
+        let myGolfer = Golfer(userID: "loganu13", nickname: "Logan Underwood", password: "Magenta^2")
         myGolfer.addRound(roundToAdd: Round.exampleRound)
         return myGolfer
     }

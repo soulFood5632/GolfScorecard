@@ -88,16 +88,12 @@ class Round {
         self.isLocked = false
     }
     
-    
-    public func getCourseName() -> String {
-        return course.name
+    /**
+     Gets the course played
+     */
+    public func getCourse() -> Course {
+        return course
     }
-    
-    public func getAddress() -> (String, String, String) {
-        return (course.city, course.state_province, course.country)
-    }
-    
-    
     
     
     /**

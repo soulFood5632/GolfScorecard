@@ -7,13 +7,14 @@
 
 import Foundation
 
-public class Course{
+public class Course : Hashable{
     
     private var teeInfo: [String: (Int, Float, [HoleInfo])]
     public let name: String
     public let city: String
     public let state_province: String
     public let country: String
+    public let courseID: UUID
     
     
     /**
@@ -25,6 +26,8 @@ public class Course{
         self.city = city_State_Country.0
         self.state_province = city_State_Country.1
         self.country = city_State_Country.2
+        
+        self.courseID = UUID()
     }
     
     /**
@@ -137,9 +140,16 @@ public class Course{
         return getTeeNames().contains(teeName)
     }
     
+    /**
+     Equals method for the course datatype
+     */
+    public static func == (lhs: Course, rhs: Course) -> Bool {
+        return lhs.courseID == rhs.courseID
+    }
     
-    
-    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(courseID)
+    }
     
     
 }
