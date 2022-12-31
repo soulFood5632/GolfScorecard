@@ -149,7 +149,7 @@ extension Course {
     
     
     static var sampleCourseInfo: Course {
-        var makaiCourseInfo = Course()
+        var makaiCourseInfo = Course(name: "Makai Golf Course", city_State_Country: ("Princeville", "HI", "USA"))
         
         makaiCourseInfo.addTee(name: "Black", slope: 134, rating: 75.4)
         makaiCourseInfo.addTee(name: "Blue", slope: 127, rating: 71.4)

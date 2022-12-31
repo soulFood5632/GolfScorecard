@@ -46,18 +46,19 @@ class Round {
             self.holeList[holeNum] = Hole(holeInfo: holeInfo)
             holeNum += 1
         }
-        
-        
-        
-        
-        
+        self.isLocked = false
         
         
     }
     
+    
+    
     public func getRoundID() -> UUID {
         return roundID
     }
+    
+    
+    
     
     /**
      A round with an implcit date, set to the current date
@@ -83,6 +84,8 @@ class Round {
         }
         
         self.datePlayed = Date.now
+        
+        self.isLocked = false
     }
     
     
@@ -131,45 +134,26 @@ class Round {
     }
     
     
-    
     /**
-     Adds a hole if one does not already exist at that number. Returns true if succseful false otherwise.
-     If Hole number is not between 1 and 18, throws NoHoleFound Error
-     Throws RoundIsLocked error if the round has been locked
+     Adds the shots to the desired hole via a list of poisitions
      */
-    public func addHole(holeNumber: Int, holeEntry: Hole) throws -> Bool {
-        if isLocked(){
-            throw Locked.RoundIsLocked
-        }
-        if holeNumber < 1 || holeNumber > 18 {
+    public func addShotsToHole(listOfPositions: [Position], holeNum: Int) throws {
+        if let _ = holeList[holeNum] {
+            holeList[holeNum]?.postionalBasedShotEntry(positionList: listOfPositions)
+        } else {
             throw RetreivalError.NoHoleExists
         }
-        if scoreCard[holeNumber] != nil{
-            return false
-        }
-        scoreCard[holeNumber] = holeEntry
-        return true
+        
     }
     
-    /**
-     Overwrites the hole prevously in the spot. If none already it exists it adds it anyway. Hole number must be between 1 and 18.
-     */
-    public func overwriteHole(holeNumber: Int, holeEntry: Hole) throws {
-        if isLocked(){
-            throw Locked.RoundIsLocked
-        }
-        if holeNumber < 1 || holeNumber > 18 {
-            throw RetreivalError.NoHoleExists
-        }
-        scoreCard[holeNumber] = holeEntry
-    }
+    
     
     
     /**
      Finds the score of the player over the total round
      */
     public func getScore() -> Int {
-        if isLocked() {
+        if isLocked {
             if cachedScore != nil {
                 return cachedScore ?? -1
             }
@@ -185,7 +169,7 @@ class Round {
      Finds the par of this round
      */
     public func getPar() -> Int {
-        if isLocked() {
+        if isLocked {
             if cachedPar != nil {
                 return cachedPar ?? -1
             }
@@ -200,14 +184,22 @@ class Round {
      */
     private func calculatePar() -> Int {
         var totalPar = 0
-        for (_, holeEntry) in scoreCard {
-            totalPar += holeEntry.getHoleInfo().getPar()
+        for (_, holeEntry) in holeList {
+            totalPar += holeEntry.getPar()
         }
         return totalPar
     }
     
+    /**
+     Gets the score of this round to par
+     */
+    
     public func getScoreToPar() -> Int {
         return getScore() - getPar()
+    }
+    
+    public func getTotalYardage() {
+        
     }
     
     
@@ -218,10 +210,12 @@ class Round {
      */
     private func calculateScore() -> Int {
         var totalScore = 0
-        for (_, holeEntry) in scoreCard {
-            totalScore += holeEntry.getScore()
-        }
-        return totalScore
+        return holeList.map{$0.value.getScore()}.reduce(0) { $0 + $1 }
+        //TODO: check to make sure that works
+//        for (_, holeEntry) in holeList {
+//            totalScore += holeEntry.getScore()
+//        }
+//        return totalScore
     }
     
     /**
@@ -229,7 +223,7 @@ class Round {
      Throws HoleNotFound exception of no hole exsits
      */
     public func getShotsFromHole(holeNum: Int) throws -> [Shot] {
-        if let listOfShots = scoreCard[holeNum]?.getShots() {
+        if let listOfShots = holeList[holeNum]?.getShots() {
             return listOfShots
         }
         throw RetreivalError.NoHoleExists
@@ -241,7 +235,7 @@ class Round {
      */
     public func getAllShots() -> [Shot] {
         var totalListofShots = [Shot]()
-        for (_, holeEntry) in scoreCard {
+        for (_, holeEntry) in holeList {
             for shot in holeEntry.getShots() {
                 totalListofShots.append(shot)
             }
@@ -250,22 +244,42 @@ class Round {
         return totalListofShots
     }
     
-    public func isLocked() -> Bool {
-        return confirmed
-    }
-    
     public func lockRound() {
-        confirmed = true
+        isLocked = true
     }
     
     public func unlockRound() {
         cachedScore = nil
         cachedShots = nil
-        confirmed = false
+        isLocked = false
     }
     
     public func getDifferential() -> Double {
         return (113 / Double(self.slope)) * Double(Float(getScore()) - self.rating)
+    }
+    
+    /**
+     Counts the number of a parituclar score in this round
+     */
+    public func countNumberOf(scoreType: NamesOfScores) -> Int {
+        let scoreToLookFor: Int
+        switch scoreType {
+        case .Double:
+            scoreToLookFor = 2
+        case .TripleOrWorse:
+            return holeList.map{ $0.value.getScoreToPar() }.filter{ (number: Int) -> Bool in number >= 3}.count
+        case .Bogey:
+            scoreToLookFor = 1
+        case .Par:
+            scoreToLookFor = 0
+        case .Birdie:
+            scoreToLookFor = -1
+        case .EagleOrBetter:
+            return holeList.map{ $0.value.getScoreToPar() }.filter{ (number: Int) -> Bool in number <= -2}.count
+        }
+        
+        return holeList.map{ $0.value.getScoreToPar() }.filter{ (number: Int) -> Bool in number == scoreToLookFor}.count
+        
     }
     
     
@@ -275,5 +289,26 @@ class Round {
     
     
 }
+
+extension Round {
+    static var exampleRound: Round {
+        do {
+            var myRound = try Round(course: Course.sampleCourseInfo, teeName: Course.sampleCourseInfo.getTeeNames()[0])
+            
+            var listOfPositions = [Position(distance: 243, lieType: Lie.tee), Position(distance: 123, lieType: Lie.bunker), Position(distance: 6, lieType: Lie.green), Position(distance: 1, lieType: Lie.green)]
+            
+            for i in 1...18 {
+                try myRound.addShotsToHole(listOfPositions: listOfPositions, holeNum: i)
+            }
+            
+            return myRound
+        } catch {
+            fatalError("error in round extension")
+        }
+        
+        
+    }
+}
+
 
 

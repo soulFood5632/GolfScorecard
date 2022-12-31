@@ -72,6 +72,8 @@ struct Shot: Equatable {
     
     
     init(startPos: Position, endPos: Position, penaltyType: Penalty) {
+        
+        self.ID = UUID()
         self.startPos = startPos
         self.endPos = endPos
         switch startPos.getLie() {

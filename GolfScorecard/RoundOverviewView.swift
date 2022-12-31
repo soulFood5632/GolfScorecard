@@ -14,7 +14,7 @@ struct RoundOverviewView: View {
         VStack {
             HStack {
                 VStack {
-                    Text("\(myRound.getScorecard().getScore())")
+                    Text("\(myRound.getScore())")
                         .font(.system(size: 60, weight: .bold))
                     
                          
@@ -23,7 +23,7 @@ struct RoundOverviewView: View {
                 }
                 .padding()
                 VStack {
-                    var scoreToPar = myRound.getScorecard().getScoreToPar()
+                    var scoreToPar = myRound.getScoreToPar()
                     if scoreToPar == 0 {
                         Text("(-)")
                             .bold()
@@ -48,7 +48,7 @@ struct RoundOverviewView: View {
                 .padding()
                 
                 VStack {
-                    var differential = Double(myRound.getScorecard().getDifferential())
+                    var differential = Double(myRound.getDifferential())
                     if differential == 0 {
                         Text(String(format: "%.1f", differential))
                             .bold()

@@ -13,6 +13,7 @@ class Hole {
     private let holeInfo: HoleInfo
     
     
+    
     /**
      Initilizer with a list of shots already included. This list must be ordered from first shot to last shot.
      */
@@ -98,6 +99,10 @@ class Hole {
      */
     public func getYardage() -> Int {
         return holeInfo.getYardage()
+    }
+    
+    public func getScoreToPar() -> Int {
+        return getScore() - getPar()
     }
     
     

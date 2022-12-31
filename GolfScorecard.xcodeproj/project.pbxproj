@@ -15,7 +15,6 @@
 		02CCDB0B294C24E600A3424F /* GolfScorecardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB0A294C24E600A3424F /* GolfScorecardUITests.swift */; };
 		02CCDB0D294C24E600A3424F /* GolfScorecardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB0C294C24E600A3424F /* GolfScorecardUITestsLaunchTests.swift */; };
 		02CCDB1A294C251F00A3424F /* Round.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB19294C251F00A3424F /* Round.swift */; };
-		02CCDB1C294C25A000A3424F /* Scorecard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB1B294C25A000A3424F /* Scorecard.swift */; };
 		02CCDB1E294C3EE800A3424F /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB1D294C3EE800A3424F /* Shot.swift */; };
 		02CCDB20294C402A00A3424F /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB1F294C402A00A3424F /* Position.swift */; };
 		02CCDB22294C40CC00A3424F /* Hole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB21294C40CC00A3424F /* Hole.swift */; };
@@ -37,6 +36,7 @@
 		02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB94295E65D100A3424F /* RoundEditView.swift */; };
 		02CCDB97295E788F00A3424F /* RoundOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB96295E788F00A3424F /* RoundOverviewView.swift */; };
 		02CCDB9B295E9FDF00A3424F /* Penalty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB9A295E9FDF00A3424F /* Penalty.swift */; };
+		02CCDB9D295FED0A00A3424F /* NamesOfScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB9C295FED0A00A3424F /* NamesOfScores.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,6 @@
 		02CCDB0A294C24E600A3424F /* GolfScorecardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfScorecardUITests.swift; sourceTree = "<group>"; };
 		02CCDB0C294C24E600A3424F /* GolfScorecardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfScorecardUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		02CCDB19294C251F00A3424F /* Round.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Round.swift; sourceTree = "<group>"; };
-		02CCDB1B294C25A000A3424F /* Scorecard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scorecard.swift; sourceTree = "<group>"; };
 		02CCDB1D294C3EE800A3424F /* Shot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		02CCDB1F294C402A00A3424F /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		02CCDB21294C40CC00A3424F /* Hole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hole.swift; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		02CCDB94295E65D100A3424F /* RoundEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundEditView.swift; sourceTree = "<group>"; };
 		02CCDB96295E788F00A3424F /* RoundOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundOverviewView.swift; sourceTree = "<group>"; };
 		02CCDB9A295E9FDF00A3424F /* Penalty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Penalty.swift; sourceTree = "<group>"; };
+		02CCDB9C295FED0A00A3424F /* NamesOfScores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamesOfScores.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,7 +195,7 @@
 				02CCDB25294D8F5900A3424F /* Course.swift */,
 				02CCDB342956842600A3424F /* RetreivalError.swift */,
 				02CCDB27294D9A3000A3424F /* HoleInfo.swift */,
-				02CCDB1B294C25A000A3424F /* Scorecard.swift */,
+				02CCDB9C295FED0A00A3424F /* NamesOfScores.swift */,
 				02CCDB21294C40CC00A3424F /* Hole.swift */,
 				02CCDB1D294C3EE800A3424F /* Shot.swift */,
 				02CCDB1F294C402A00A3424F /* Position.swift */,
@@ -341,7 +341,6 @@
 				02CCDB97295E788F00A3424F /* RoundOverviewView.swift in Sources */,
 				02CCDB22294C40CC00A3424F /* Hole.swift in Sources */,
 				02CCDB28294D9A3000A3424F /* HoleInfo.swift in Sources */,
-				02CCDB1C294C25A000A3424F /* Scorecard.swift in Sources */,
 				02CCDAF1294C24E500A3424F /* LoginView.swift in Sources */,
 				02CCDB8A295D653D00A3424F /* GolferHomePage.swift in Sources */,
 				02CCDB20294C402A00A3424F /* Position.swift in Sources */,
@@ -353,6 +352,7 @@
 				02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,
 				02CCDB90295D6D4200A3424F /* AddRoundSetupView.swift in Sources */,
+				02CCDB9D295FED0A00A3424F /* NamesOfScores.swift in Sources */,
 				02CCDB9B295E9FDF00A3424F /* Penalty.swift in Sources */,
 				02CCDB3D295CEC3200A3424F /* Filter.swift in Sources */,
 				02CCDB3B295C24F700A3424F /* Report.swift in Sources */,

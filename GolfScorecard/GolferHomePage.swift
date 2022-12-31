@@ -14,39 +14,91 @@ struct GolferHomePage: View {
     
     var body: some View {
         NavigationView {
-            
-
-            
-            List {
+            VStack (alignment: .center) {
                 
-
-                
-                NavigationLink(destination: ManageRoundsView(listOfRounds: golfer.getRounds())) {
-                    Text("Manage Rounds")
-                }
+                Text("Welcome \(golfer.nickname)")
+                    .font(.title)
+                    .bold()
+                    .padding()
+                    .multilineTextAlignment(.center)
+                    
                 
                 
                 
                 
                 
-                
-            }
-            .toolbar(content: {
-                ToolbarItem (placement: .bottomBar) {
-                    NavigationLink("Log Out", destination: LoginView())
-                        .bold()
-                        .foregroundColor(.red)
-                }
-                ToolbarItem (placement: .primaryAction) {
-                    Button(action: {
-                        //TODO: Add menu of itemrs
-                    }) {
-                        Image(systemName: "ellipsis")
+                List {
+                    
+                    NavigationLink(destination: ManageRoundsView(listOfRounds: golfer.getRounds())) {
+                        Label("Manage Rounds", systemImage: "figure.golf")
                     }
+                    
+                    
+                    
+                    
+                    
+                    
                 }
-            })
+                
+                Text("At a Glance")
+                    .font(.title2)
+                    .bold()
+                    .padding()
+                
+                HStack {
+                    
+                    ZStack {
+                        
+                        Text("You've posted \(golfer.getNumberOfRounds()) rounds")
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.red)
+                            .opacity(0.2)
+                            .padding()
+                            
+                            
+                            
+                    }
+                    
+                    ZStack {
+                        
+                        Text("You've posted \(golfer.getNumberOfRounds()) rounds")
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .padding()
+                        
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.green)
+                            .opacity(0.2)
+                            .padding()
+                            
+                            
+                    }
+                    
+                    
+                    
+                    
+                }
+                    
+                .toolbar(content: {
+                    ToolbarItem (placement: .bottomBar) {
+                        NavigationLink("Log Out", destination: LoginView())
+                            .bold()
+                            .foregroundColor(.red)
+                    }
+                    ToolbarItem (placement: .primaryAction) {
+                        Menu ("More"){
+                            
+                        }
+                    }
+                })
+            }
             
-            .navigationTitle("Home")
+            
+            
             
         }
         

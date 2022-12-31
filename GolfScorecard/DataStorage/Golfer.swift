@@ -11,14 +11,22 @@ class Golfer{
     private var handicap: Double
     private var roundList: [Round]
     private var differentialList: [Double]
+    public var nickname: String
+    public var password: String
+    public var userID: String
     
     private let DEFAULT_HANDICAP: Double = 36.0
     
-    init() {
+    init(userID: String, nickname: String, password: String) {
         self.handicap = DEFAULT_HANDICAP
         roundList = [Round]()
         differentialList = [Double]()
+        self.nickname = nickname
+        self.password = password
+        self.userID = userID
     }
+    
+    
     
     
     
@@ -54,6 +62,10 @@ class Golfer{
 //        addToHandicapCalc(differential: roundToAdd.getScorecard().getDifferential())
     }
     
+    public func getNumberOfCourses() -> Int {
+        return Set(roundList.map{ round in round.getCourseName() }).count
+    }
+    
     
     
     // TODO: Do all the stuff for reports:
@@ -64,5 +76,10 @@ class Golfer{
 }
 
 extension Golfer {
-    static let sampleGolfer = Golfer()
+    static var sampleGolfer: Golfer {
+        var myGolfer = Golfer(userID: "loganu13", nickname: "Logan Underwood", password: "Magenta^2")
+        myGolfer.addRound(roundToAdd: Round.exampleRound)
+        return myGolfer
+    }
+    
 }
