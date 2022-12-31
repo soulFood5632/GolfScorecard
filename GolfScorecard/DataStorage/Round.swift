@@ -258,6 +258,8 @@ class Round {
         return (113 / Double(self.slope)) * Double(Float(getScore()) - self.rating)
     }
     
+    
+    
     /**
      Counts the number of a parituclar score in this round
      */

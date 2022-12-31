@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Golfer{
+class Golfer {
     private var handicap: Double
     private var roundList: [Round]
     private var differentialList: [Double]
@@ -62,8 +62,42 @@ class Golfer{
 //        addToHandicapCalc(differential: roundToAdd.getScorecard().getDifferential())
     }
     
+    /**
+     Gets the number of unique courses this golfer has played
+     */
+    
     public func getNumberOfCourses() -> Int {
         return Set(roundList.map{ round in round.getCourseName() }).count
+    }
+    
+//    public func getMostCommonCourse() -> Course {
+//        
+//    }
+    
+    
+    /**
+     Gets the low round of this golfer. The user must have at least one round.
+     */
+    public func getLowRound() -> Int {
+        var lowRound = roundList[0].getScore()
+        
+        for round in roundList {
+            if lowRound > round.getScore() {
+                lowRound = round.getScore()
+            }
+        }
+        
+        return lowRound
+    }
+    
+    /**
+     Gets the scoring average of this golfer. The user must have at least one round.
+     */
+    
+    public func scoringAverage() -> Float {
+        var totalScore = roundList.map { round in round.getScore()}.reduce(0) { $0 + $1 }
+        
+        return Float(totalScore) / Float(roundList.count)
     }
     
     

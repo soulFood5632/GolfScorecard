@@ -20,6 +20,8 @@ struct AddRoundSetupView: View {
                         Label("From Database", systemImage: "")
                     }
                     
+                    //TODO: Change to value from drop down. think MP1
+                    
                 }
             }
             .sheet(isPresented: $courseListView) {
