@@ -10,12 +10,12 @@ import Foundation
 
 public class CourseDatabase {
     
-    private var listOfCourses: [String: CourseInfo]
+    private var listOfCourses: [String: Course]
     
     private var courseSet: Set<String>
     
     init(){
-        self.listOfCourses = [String: CourseInfo]()
+        self.listOfCourses = [String: Course]()
         self.courseSet = Set<String>()
     }
     
@@ -34,7 +34,7 @@ public class CourseDatabase {
     /**
      Adds a course of that name. if the course already exists it overrides it.
      */
-    public func addCourse(name: String, courseData: CourseInfo) {
+    public func addCourse(name: String, courseData: Course) {
         listOfCourses[name] = courseData
         courseSet.insert(name)
     }
@@ -42,7 +42,7 @@ public class CourseDatabase {
     /**
      Gets a course of the name given. If no course exists then it will throw a coursenotfound exception
      */
-    public func getCourse(name: String) throws -> CourseInfo {
+    public func getCourse(name: String) throws -> Course {
         if let course = listOfCourses[name] {
             return course
         }

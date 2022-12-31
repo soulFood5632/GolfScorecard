@@ -7,23 +7,63 @@
 
 import Foundation
 
-struct Shot: Equatable{
+struct Shot: Equatable {
+    
+    
     private let startPos: Position
     private let endPos: Position
     private let shotType: ShotType
     private let penalty: Penalty
+    public let ID: UUID
     
     init(startPos: Position, endPos: Position) {
         self.startPos = startPos
         self.endPos = endPos
-        if startPos.getLie() == Lie.tee {
-            shotType = ShotType.drive
-        } else if startPos.getLie() == Lie.hazard {
-            fatalError("Hazard Lie is not a valid start Position")
-        } else if startPos.getLie() == Lie.green {
+        
+        self.ID = UUID()
+        switch startPos.getLie() {
+        case Lie.tee:
+            if startPos.getDistance() > 255 { //cutoff for what is a tee shot
+                shotType = ShotType.drive
+            } else {
+                shotType = ShotType.approach
+            }
+            break
+            
+        case Lie.fairway:
+            if startPos.getDistance() > 50 { //cuttoff for approach shot
+                shotType = ShotType.approach
+            } else {
+                shotType = ShotType.chip
+            }
+            break
+            
+        case Lie.bunker:
+            if startPos.getDistance() > 50 { //cuttoff for approach shot
+                shotType = ShotType.approach
+            } else {
+                shotType = ShotType.sand
+            }
+            break
+            
+        case Lie.hazard:
+            fatalError("No start posotion to a swing can be in a hazard")
+            
+        case Lie.holed:
+            fatalError("No start position can be in the hole")
+            
+        case Lie.green:
             shotType = ShotType.putt
-        } else {
-            shotType = ShotType.shot
+            
+        case .rough:
+            if startPos.getDistance() > 50 { //cuttoff for approach shot
+                shotType = ShotType.approach
+            } else {
+                shotType = ShotType.chip
+            }
+            
+        case .recovery:
+            shotType = ShotType.approach
         }
         
         penalty = Penalty.NoPenalty
@@ -42,6 +82,7 @@ struct Shot: Equatable{
                 shotType = ShotType.approach
             }
             break
+            
         case Lie.fairway:
             if startPos.getDistance() > 50 { //cuttoff for approach shot
                 shotType = ShotType.approach
@@ -49,6 +90,7 @@ struct Shot: Equatable{
                 shotType = ShotType.chip
             }
             break
+            
         case Lie.bunker:
             if startPos.getDistance() > 50 { //cuttoff for approach shot
                 shotType = ShotType.approach
@@ -56,14 +98,25 @@ struct Shot: Equatable{
                 shotType = ShotType.sand
             }
             break
+            
         case Lie.hazard:
             fatalError("No start posotion to a swing can be in a hazard")
+            
         case Lie.holed:
             fatalError("No start position can be in the hole")
             
-        
-        
-        
+        case Lie.green:
+            shotType = ShotType.putt
+            
+        case .rough:
+            if startPos.getDistance() > 50 { //cuttoff for approach shot
+                shotType = ShotType.approach
+            } else {
+                shotType = ShotType.chip
+            }
+            
+        case .recovery:
+            shotType = ShotType.approach
         }
         
         self.penalty = penaltyType
@@ -102,9 +155,6 @@ struct Shot: Equatable{
      Gets the expected value to hole out from the ending position position
      */
     public func getAfterExpectedShots() -> Double {
-        if endPos.getLie() == Lie.hazard {
-            //TODO: Deal with this special case
-        }
         return endPos.getExpectedShots()
     }
     
@@ -113,6 +163,9 @@ struct Shot: Equatable{
      */
     
     public func getShotsGained() -> Double {
+        if penalty != Penalty.NoPenalty {
+            return getAfterExpectedShots() - getPriorExpectedShots() - 2
+        }
         return getAfterExpectedShots() - getPriorExpectedShots() - 1
     }
     

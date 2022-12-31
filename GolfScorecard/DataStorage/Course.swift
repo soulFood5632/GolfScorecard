@@ -7,12 +7,24 @@
 
 import Foundation
 
-public class CourseInfo{
+public class Course{
     
     private var teeInfo: [String: (Int, Float, [HoleInfo])]
+    public let name: String
+    public let city: String
+    public let state_province: String
+    public let country: String
     
-    init() {
+    
+    /**
+     Init for this course, **Note** the triplet must be entered in the form (City, State, Country)
+     */
+    init(name: String, city_State_Country: (String, String, String)) {
         self.teeInfo = [String: (Int, Float, [HoleInfo])]()
+        self.name = name
+        self.city = city_State_Country.0
+        self.state_province = city_State_Country.1
+        self.country = city_State_Country.2
     }
     
     /**
@@ -132,12 +144,12 @@ public class CourseInfo{
     
 }
 
-extension CourseInfo {
+extension Course {
     
     
     
-    static var sampleCourseInfo: CourseInfo {
-        var makaiCourseInfo = CourseInfo()
+    static var sampleCourseInfo: Course {
+        var makaiCourseInfo = Course()
         
         makaiCourseInfo.addTee(name: "Black", slope: 134, rating: 75.4)
         makaiCourseInfo.addTee(name: "Blue", slope: 127, rating: 71.4)

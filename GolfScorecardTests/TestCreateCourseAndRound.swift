@@ -13,7 +13,7 @@ import XCTest
 final class TestCreateCourseAndRound: XCTestCase {
     
     private let myDatabase = CourseDatabase()
-    private var makaiCourseInfo = CourseInfo()
+    private var makaiCourseInfo = Course()
     
     private var myGolferList = GolferList()
     

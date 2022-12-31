@@ -87,11 +87,19 @@ class Hole {
     
     
     /**
-     Gets the hole information.
+     Gets the par of this hole
      */
-    public func getHoleInfo() -> HoleInfo {
-        return holeInfo
+    public func getPar() -> Int {
+        return holeInfo.getPar()
     }
+    
+    /**
+     Gets the yardage of this hole
+     */
+    public func getYardage() -> Int {
+        return holeInfo.getYardage()
+    }
+    
     
     /**
      A streamlined data entry method containing all the positions from the hole.
