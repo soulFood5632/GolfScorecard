@@ -38,10 +38,16 @@ struct ManageRoundsView: View {
                 VStack {
                     if(listOfRounds.isEmpty){
                         Text("You have no rounds")
+                        
+                        //TODO: complete the round analysis page for this pop up
                     }
                     
                 }
             }
+            
+            //TODO: fix the back buttons related to this and the add round page
+            
+            //TODO: fix weird spacing issue when clicking add round
                 
                 
         

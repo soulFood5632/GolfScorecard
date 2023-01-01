@@ -106,6 +106,8 @@ struct GolferHomePage: View {
                             Text("Strokes gained Table TBA")
                             
                             //TODO: Add a table here for strokes gained in all 4 phases
+                            
+                            
                         }
                         
                         RoundedRectangle(cornerRadius: 10)
