@@ -264,6 +264,7 @@ class Golfer {
         
         //TODO: ensure that this not flipped
     }
+
     
     /**
      Gets the number of unique courses this golfer has played
@@ -277,7 +278,6 @@ class Golfer {
      Gets the most common course played. Requires that this golfer has played a
      course. If two courses are tied it returns a rondom course
      */
-    
     public func getMostCommonCourse() -> Course {
         if mostPopularCourse != nil {
             return mostPopularCourse ?? Course.sampleCourseInfo
@@ -317,10 +317,29 @@ class Golfer {
     /**
      Gets the scoring average of this golfer. The user must have at least one round.
      */
-    
     public func scoringAverage() -> Float {
         let totalScore = roundList.map { round in round.getScore()}.reduce(0) { $0 + $1 }
         return Float(totalScore) / Float(roundList.count)
+    }
+    
+    
+    /**
+     Gets the most recent round by this golfer. Requires the golfer to have a round
+     */
+    public func getLastRound() -> Round {
+        var sortedList = roundList.sorted(by: {(elemnent1, element2) in
+            switch elemnent1.getDate().compare(element2.getDate()) {
+            case ComparisonResult.orderedAscending:
+                return false
+            case ComparisonResult.orderedSame:
+                return false
+            case ComparisonResult.orderedDescending:
+                return true
+            }
+            
+        })
+        
+        return sortedList[0]
     }
     
     
@@ -336,6 +355,11 @@ extension Golfer {
     static var sampleGolfer: Golfer {
         let myGolfer = Golfer(userID: "loganu13", nickname: "Logan Underwood", password: "Magenta^2")
         myGolfer.addRound(roundToAdd: Round.exampleRound)
+        return myGolfer
+    }
+    
+    static var lazyGolfer: Golfer {
+        let myGolfer = Golfer(userID: "NikYak67", nickname: "NikYak", password: "Pollution56")
         return myGolfer
     }
     

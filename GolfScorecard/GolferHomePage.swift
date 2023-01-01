@@ -92,10 +92,24 @@ struct GolferHomePage: View {
                     
                     ZStack {
                         
-                        //TODO: Add a table here for strokes gained in all 4 phases
+                        if golfer.getRounds().isEmpty {
+                            
+                            Text("Post a round for juicy stats 😏😏")
+                                .bold()
+                                .multilineTextAlignment(.center)
+                                .padding()
+                            
+                            
+                            
+                        } else {
+                            
+                            Text("Strokes gained Table TBA")
+                            
+                            //TODO: Add a table here for strokes gained in all 4 phases
+                        }
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(.orange)
+                            .fill(.mint)
                             .opacity(0.2)
                             .padding()
                         
@@ -109,74 +123,170 @@ struct GolferHomePage: View {
                 
                 HStack {
                     
-                    //TODO: Add section for if the user has no rounds
-                    
-                    ZStack {
-                        
-                        VStack {
-                            Text("\(golfer.getLowRound())")
-                                .bold()
-                                .multilineTextAlignment(.center)
+                    if golfer.getRounds().isEmpty {
+                        ZStack {
                             
-                            Text("Low Round")
-                                .font(.caption)
+                            VStack {
+                                Text("Get started by posting a round through the manage rounds tab")
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                    .font(.title3)
+                                    .padding()
+                                
+                            }
+                            .padding()
+                            
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.green)
+                                .opacity(0.2)
+                                .padding()
+                        }
+                        
+                    } else {
+                        
+                        ZStack {
+                            
+                            VStack {
+                                Text("\(golfer.getLowRound())")
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                
+                                Text("Low Round")
+                                    .font(.caption)
+                                
+                            }
+                            .padding()
+                            
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.green)
+                                .opacity(0.2)
+                                .padding()
+                        }
+                        
+                        ZStack {
+                            
+                            VStack {
+                                Text(String(format: "%.1f", golfer.scoringAverage()))
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                
+                                Text("Scoring Average")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal)
+                                
+                            }
+                            .padding()
+                            
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.green)
+                                .opacity(0.2)
+                                .padding()
+                        }
+                        
+                        ZStack {
+                            
+                            VStack {
+                                Text(String(format: "%.1f", golfer.getHandicap()))
+                                    .bold()
+                                    .multilineTextAlignment(.center)
+                                
+                                Text("Handicap")
+                                    .font(.caption)
+                                    .padding(.horizontal)
+                                    .multilineTextAlignment(.center)
+                                
+                            }
+                            .padding()
+                            
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.green)
+                                .opacity(0.2)
+                                .padding()
+                        }
+                    }
+                    
+                    
+                    
+                }
+                
+                HStack {
+                    ZStack {
+                        VStack {
+                            let numOfParBreakers = golfer.getLastRound().countNumberOf(scoreType: NamesOfScores.Birdie) + golfer.getLastRound().countNumberOf(scoreType: NamesOfScores.EagleOrBetter)
+                            if numOfParBreakers > 2 {
+                                Text("🔥🔥")
+                                    .font(.title)
+                                
+                            } else {
+                                Text("🧊🧊")
+                                    .font(.title)
+                            }
+                            
+                            if numOfParBreakers == 1 {
+                                Text("\(numOfParBreakers) Par Breaker Last Round")
+                                    .multilineTextAlignment(.center)
+                                    .bold()
+                            } else if numOfParBreakers == 0 {
+                                Text("Birdie Free Last Round")
+                                    .multilineTextAlignment(.center)
+                                    .bold()
+                            }
+                            Text("\(numOfParBreakers) Par Breakers Last Round")
+                                .multilineTextAlignment(.center)
+                                .bold()
+                                
                             
                         }
                         .padding()
                         
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(.green)
+                            .fill(.yellow)
                             .opacity(0.2)
                             .padding()
                     }
                     
                     ZStack {
-                        
                         VStack {
-                            Text(String(format: "%.2f", golfer.scoringAverage()))
-                                .bold()
-                                .multilineTextAlignment(.center)
-                            
-                            Text("Scoring Average")
-                                .font(.caption)
-                                .multilineTextAlignment(.center)
-                                .padding(.horizontal)
+                            let numOfBogeys = golfer.getLastRound().countNumberOf(scoreType: NamesOfScores.Bogey)
+                            if numOfBogeys > 2 {
+                                Text("🧊🧊")
+                                    .font(.title)
+                            } else {
+                                Text("🔥🔥")
+                                    .font(.title)
+                            }
+                            if numOfBogeys == 0 {
+                                Text("Bogey Free Last Round")
+                                    .multilineTextAlignment(.center)
+                                    .bold()
+                            } else if numOfBogeys == 1 {
+                                Text("\(numOfBogeys) Bogey Last Round")
+                                    .multilineTextAlignment(.center)
+                                    .bold()
+                            } else {
+                                
+                                Text("\(numOfBogeys) Bogeys Last Round")
+                                    .multilineTextAlignment(.center)
+                                    .bold()
+                            }
+                                
                             
                         }
                         .padding()
                         
-                        
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(.green)
-                            .opacity(0.2)
-                            .padding()
-                    }
-                    
-                    ZStack {
-                        
-                        VStack {
-                            Text(String(format: "%.2f", golfer.getHandicap()))
-                                .bold()
-                                .multilineTextAlignment(.center)
-                            
-                            Text("Handicap")
-                                .font(.caption)
-                                .padding(.horizontal)
-                                .multilineTextAlignment(.center)
-                            
-                        }
-                        .padding()
-                        
-                        
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.green)
+                            .fill(.yellow)
                             .opacity(0.2)
                             .padding()
                     }
                     
                     
-                    //TODO: add another row of data here...
                 }
                 
                 
@@ -201,12 +311,14 @@ struct GolferHomePage: View {
                             .foregroundColor(.red)
                     }
                     ToolbarItem (placement: .primaryAction) {
-                        Menu ("More"){
-                            //TODO: Fix to make this three dots
+                        Menu {
+                            NavigationLink (destination: ManageAccountView(golfer: golfer)) {
+                                Text("Manage Account")
+                            }
+
                             
-                            //change password
-                            //etc.
-                            
+                        } label: {
+                            Image(systemName: "ellipsis")
                         }
                     }
                 })

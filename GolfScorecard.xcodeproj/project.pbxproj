@@ -39,6 +39,7 @@
 		02CCDB9D295FED0A00A3424F /* NamesOfScores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB9C295FED0A00A3424F /* NamesOfScores.swift */; };
 		02CCDB9F29601FB400A3424F /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB9E29601FB400A3424F /* ReportView.swift */; };
 		02CCDBA12960BE3500A3424F /* Authenticate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDBA02960BE3500A3424F /* Authenticate.swift */; };
+		02CCDBA32960F9F300A3424F /* ManageAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDBA22960F9F300A3424F /* ManageAccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		02CCDB9C295FED0A00A3424F /* NamesOfScores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamesOfScores.swift; sourceTree = "<group>"; };
 		02CCDB9E29601FB400A3424F /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		02CCDBA02960BE3500A3424F /* Authenticate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authenticate.swift; sourceTree = "<group>"; };
+		02CCDBA22960F9F300A3424F /* ManageAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				02CCDB8D295D69FE00A3424F /* NewAccountView.swift */,
 				02CCDB89295D653D00A3424F /* GolferHomePage.swift */,
 				02CCDB8B295D681100A3424F /* ManageRoundsView.swift */,
+				02CCDBA22960F9F300A3424F /* ManageAccountView.swift */,
 				02CCDB8F295D6D4200A3424F /* AddRoundSetupView.swift */,
 				02CCDB9E29601FB400A3424F /* ReportView.swift */,
 				02CCDB92295D6D7800A3424F /* ListEditView.swift */,
@@ -359,6 +362,7 @@
 				02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,
 				02CCDB90295D6D4200A3424F /* AddRoundSetupView.swift in Sources */,
+				02CCDBA32960F9F300A3424F /* ManageAccountView.swift in Sources */,
 				02CCDB9D295FED0A00A3424F /* NamesOfScores.swift in Sources */,
 				02CCDB9B295E9FDF00A3424F /* Penalty.swift in Sources */,
 				02CCDB3D295CEC3200A3424F /* Filter.swift in Sources */,
