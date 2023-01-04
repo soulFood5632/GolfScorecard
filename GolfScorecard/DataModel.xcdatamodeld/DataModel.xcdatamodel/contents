@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Course" representedClassName="Course" syncable="YES">
+        <attribute name="city" attributeType="String"/>
+        <attribute name="country" attributeType="String"/>
+        <attribute name="courseID" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="state_province" attributeType="String"/>
+        <attribute name="teeInfo" attributeType="Transformable" customClassName="[String: TeeData]"/>
+    </entity>
+    <entity name="HoleInfo" representedClassName="HoleInfo" syncable="YES">
+        <attribute name="par" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="yardage" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="TeeData" representedClassName="TeeData" syncable="YES">
+        <attribute name="holeData" attributeType="Transformable" customClassName="[HoleInfo]"/>
+        <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="slope" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+</model>

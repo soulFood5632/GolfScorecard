@@ -90,19 +90,19 @@ class Hole {
     /**
      Gets the par of this hole
      */
-    public func getPar() -> Int {
+    public func getPar() -> Int64 {
         return holeInfo.getPar()
     }
     
     /**
      Gets the yardage of this hole
      */
-    public func getYardage() -> Int {
+    public func getYardage() -> Int64 {
         return holeInfo.getYardage()
     }
     
     public func getScoreToPar() -> Int {
-        return getScore() - getPar()
+        return Int(getScore()) - Int(getPar())
     }
     
     

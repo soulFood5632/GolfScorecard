@@ -10,8 +10,8 @@ import Foundation
 class Round {
     
     private var datePlayed: Date
-    private var slope: Int
-    private var rating: Float
+    private var slope: Int64
+    private var rating: Int64 //TODO: Fix this
     private var holeList: [Int: Hole]
     private var isLocked: Bool
     private var course: Course
@@ -34,9 +34,9 @@ class Round {
         if !course.doesTeeExist(teeName: teeName) {
             throw RetreivalError.NoTeeExists
         }
-        try self.slope = course.getTeeData(name: teeName).0
-        try self.rating = course.getTeeData(name: teeName).1
-        let holeData = try course.getTeeData(name: teeName).2
+        try self.slope = course.getTeeData(name: teeName).slope
+        try self.rating = course.getTeeData(name: teeName).rating
+        let holeData = try course.getTeeData(name: teeName).holeData
         
         self.holeList = [Int: Hole]()
         
@@ -70,15 +70,15 @@ class Round {
         if !course.doesTeeExist(teeName: teeName) {
             throw RetreivalError.NoTeeExists
         }
-        try self.slope = course.getTeeData(name: teeName).0
-        try self.rating = course.getTeeData(name: teeName).1
-        let holeData = try course.getTeeData(name: teeName).2
+        try self.slope = course.getTeeData(name: teeName).slope
+        try self.rating = course.getTeeData(name: teeName).rating
+        let holeData = try course.getTeeData(name: teeName).holeData
         
         self.holeList = [Int: Hole]()
         
         var holeNum =  1
         
-        for holeInfo in holeData {
+        for holeInfo in holeData! {
             self.holeList[holeNum] = Hole(holeInfo: holeInfo)
             holeNum += 1
         }
@@ -290,25 +290,25 @@ class Round {
     
 }
 
-extension Round {
-    static var exampleRound: Round {
-        do {
-            let myRound = try Round(course: Course.sampleCourseInfo, teeName: Course.sampleCourseInfo.getTeeNames()[0])
-            
-            let listOfPositions = [Position(distance: 243, lieType: Lie.tee), Position(distance: 123, lieType: Lie.bunker), Position(distance: 6, lieType: Lie.green), Position(distance: 1, lieType: Lie.green)]
-            
-            for i in 1...18 {
-                try myRound.addShotsToHole(listOfPositions: listOfPositions, holeNum: i)
-            }
-            
-            return myRound
-        } catch {
-            fatalError("error in round extension")
-        }
-        
-        
-    }
-}
+//extension Round {
+//    static var exampleRound: Round {
+//        do {
+//            let myRound = try Round(course: Course.sampleCourseInfo, teeName:
+//            
+//            let listOfPositions = [Position(distance: 243, lieType: Lie.tee), Position(distance: 123, lieType: Lie.bunker), Position(distance: 6, lieType: Lie.green), Position(distance: 1, lieType: Lie.green)]
+//            
+//            for i in 1...18 {
+//                try myRound.addShotsToHole(listOfPositions: listOfPositions, holeNum: i)
+//            }
+//            
+//            return myRound
+//        } catch {
+//            fatalError("error in round extension")
+//        }
+//        
+//        
+//    }
+//}
 
 
 

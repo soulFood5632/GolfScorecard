@@ -1,45 +1,51 @@
 //
-//  CourseInfo.swift
+//  Course+CoreDataClass.swift
 //  GolfScorecard
 //
-//  Created by Logan Underwood on 2022-12-16.
+//  Created by Logan Underwood on 2023-01-03.
+//
 //
 
 import Foundation
+import CoreData
 
-public class Course : Hashable{
-    
-    private var teeInfo: [String: (Int, Float, [HoleInfo])]
-    public let name: String
-    public let city: String
-    public let state_province: String
-    public let country: String
-    public let courseID: UUID
+@objc(Course)
+public class Course: NSManagedObject {
     
     
-    /**
-     Init for this course, **Note** the triplet must be entered in the form (City, State, Country)
-     */
-    init(name: String, city_State_Country: (String, String, String)) {
-        self.teeInfo = [String: (Int, Float, [HoleInfo])]()
-        self.name = name
-        self.city = city_State_Country.0
-        self.state_province = city_State_Country.1
-        self.country = city_State_Country.2
-        
-        self.courseID = UUID()
-    }
+//    private var teeInfo: [String: (Int, Float, [HoleInfo])]
+//       public let name: String
+//       public let city: String
+//       public let state_province: String
+//       public let country: String
+//       public let courseID: UUID
+       
+       
+       /**
+        Init for this course, **Note** the triplet must be entered in the form (City, State, Country)
+        */
+       init(name: String, city_State_Country: (String, String, String), entity: NSEntityDescription, context: NSManagedObjectContext?) {
+           super.init(entity: entity, insertInto: context)
+           self.teeInfo = [String: TeeData]()
+           self.name = name
+           self.city = city_State_Country.0
+           self.state_province = city_State_Country.1
+           self.country = city_State_Country.2
+           
+           self.courseID = UUID()
+       }
+    
     
     /**
      Adds a tee to the course. Returns false if the tee of the same name already exists,
      true otherwise. In the both cases the data is updated
      */
     public func addTee(name: String, slope: Int, rating: Float) -> Bool{
-        if(teeInfo[name] != nil){
-            teeInfo[name] = (slope, rating, [HoleInfo]())
+        if(teeInfo![name] != nil){
+            teeInfo![name] = TeeData(slope: slope, rating: rating)
             return true
         }
-        teeInfo[name] = (slope, rating, [HoleInfo]())
+        teeInfo![name] = TeeData(slope: slope, rating: rating)
         return false
     }
     
@@ -48,11 +54,11 @@ public class Course : Hashable{
      Returns the a tuple of the form (Slope, Rating, [HoleInfo]).
      Throws a NoTeeExists error if the tee requested does not exist
      */
-    public func getTeeData(name: String) throws -> (Int, Float, [HoleInfo]) {
-        guard let teeData = teeInfo[name] else {
+    public func getTeeData(name: String) throws -> TeeData {
+        guard let teeData = teeInfo![name] else {
             throw RetreivalError.NoTeeExists
         }
-    
+        
         return teeData
         
     }
@@ -64,7 +70,7 @@ public class Course : Hashable{
      */
     public func getHoleData(name: String, holeNum : Int) throws -> HoleInfo {
         
-        guard let holeYardages = teeInfo[name]?.2 else {
+        guard let holeYardages = teeInfo![name]!.holeData else {
             throw RetreivalError.NoTeeExists
         }
         if holeNum > holeYardages.count {
@@ -72,14 +78,14 @@ public class Course : Hashable{
         }
         return holeYardages[holeNum - 1]
         
-
+        
     }
     
     /**
      Gets the list of tee names for this course
      */
     public func getTeeNames() -> [String] {
-        return teeInfo.map{teeName, information in teeName}
+        return teeInfo!.map{teeName, information in teeName}
     }
     
     /**
@@ -91,7 +97,7 @@ public class Course : Hashable{
         if !doesTeeExist(teeName: teeName) {
             throw RetreivalError.NoTeeExists
         }
-        teeInfo[teeName]?.2.append(contentsOf: info)
+        teeInfo![teeName]!.updateHoleData(holeByHoleData: info)
     }
     
     /**
@@ -104,12 +110,12 @@ public class Course : Hashable{
         if !doesTeeExist(teeName: teeName) {
             throw RetreivalError.NoTeeExists
         }
-        teeInfo[teeName]?.2.append(info)
+        teeInfo![teeName]?.updateHoleData(holeData: info)
     }
     
     /**
      Helper method to add a bulk set of yardages. The tee names key corresponds to the order of the yardages
-     of the list in the tuple. Each teename must exist or a retreival error will be thrown. 
+     of the list in the tuple. Each teename must exist or a retreival error will be thrown.
      */
     
     public func bulkHoleInfoAdd(teeNamesKey: [String], holeData: [(Int, [Int])]) throws {
@@ -122,7 +128,7 @@ public class Course : Hashable{
         for multiTeeIndividualHoleData in holeData {
             var index = 0;
             for individualTeeHoleData in multiTeeIndividualHoleData.1 {
-                let newHoleData = HoleInfo(par: multiTeeIndividualHoleData.0, yardage: individualTeeHoleData)
+                let newHoleData = HoleInfo(par: Int64(multiTeeIndividualHoleData.0), yardage: Int64(individualTeeHoleData), entity: self.entity, context: nil)
                 do {
                     try addHoleInfo(teeName: teeNamesKey[index], info: newHoleData)
                 } catch RetreivalError.NoTeeExists {
@@ -147,23 +153,15 @@ public class Course : Hashable{
         return lhs.courseID == rhs.courseID
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(courseID)
-    }
-    
     
 }
-
-
-//Git test
-
 
 extension Course {
     
     
     
-    static var sampleCourseInfo: Course {
-        var makaiCourseInfo = Course(name: "Makai Golf Course", city_State_Country: ("Princeville", "HI", "USA"))
+    static func sampleCourseInfo(entity: NSEntityDescription, context: NSManagedObjectContext?) -> Course {
+        var makaiCourseInfo = Course(name: "Makai Golf Course", city_State_Country: ("Princeville", "HI", "USA"), entity: entity, context: context)
         
         makaiCourseInfo.addTee(name: "Black", slope: 134, rating: 75.4)
         makaiCourseInfo.addTee(name: "Blue", slope: 127, rating: 71.4)
@@ -362,5 +360,4 @@ extension Course {
         return makaiCourseInfo
     }
 }
-
 

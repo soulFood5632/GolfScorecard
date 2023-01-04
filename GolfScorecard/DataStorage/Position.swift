@@ -10,7 +10,7 @@ import Foundation
 public struct Position: Equatable {
     
     private let distance: Int
-    private let lieType : Lie
+    private let lieType: Lie
     
     
     public init(distance: Int, lieType: Lie) {

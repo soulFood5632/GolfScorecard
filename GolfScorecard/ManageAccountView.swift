@@ -16,6 +16,6 @@ struct ManageAccountView: View {
 
 struct ManageAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        ManageAccountView(golfer: Golfer.sampleGolfer)
+        ManageAccountView(golfer: Golfer(userID: "yellow", nickname: "Pink", password: "Green"))
     }
 }

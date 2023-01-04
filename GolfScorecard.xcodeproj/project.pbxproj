@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		029D88AC2965408100B91F22 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 029D88AA2965408100B91F22 /* DataModel.xcdatamodeld */; };
+		029D88AF29654ADC00B91F22 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D88AD29654ADC00B91F22 /* Course.swift */; };
+		029D88B329654D0300B91F22 /* HoleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D88B129654D0300B91F22 /* HoleInfo.swift */; };
+		029D88C22965547900B91F22 /* HoleInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D88BF2965547900B91F22 /* HoleInfo+CoreDataProperties.swift */; };
+		029D88C72965551D00B91F22 /* TeeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D88C52965551D00B91F22 /* TeeData.swift */; };
+		029D88C82965551D00B91F22 /* TeeData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D88C62965551D00B91F22 /* TeeData+CoreDataProperties.swift */; };
+		029D88D029655C1400B91F22 /* Course+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029D88CF29655C1400B91F22 /* Course+CoreDataProperties.swift */; };
 		02CCDAEF294C24E500A3424F /* GolfScorecardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDAEE294C24E500A3424F /* GolfScorecardApp.swift */; };
 		02CCDAF1294C24E500A3424F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDAF0294C24E500A3424F /* LoginView.swift */; };
 		02CCDAF3294C24E600A3424F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02CCDAF2294C24E600A3424F /* Assets.xcassets */; };
@@ -19,8 +26,6 @@
 		02CCDB20294C402A00A3424F /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB1F294C402A00A3424F /* Position.swift */; };
 		02CCDB22294C40CC00A3424F /* Hole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB21294C40CC00A3424F /* Hole.swift */; };
 		02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB23294D8ECA00A3424F /* Golfer.swift */; };
-		02CCDB26294D8F5900A3424F /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB25294D8F5900A3424F /* Course.swift */; };
-		02CCDB28294D9A3000A3424F /* HoleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB27294D9A3000A3424F /* HoleInfo.swift */; };
 		02CCDB2A294E39BC00A3424F /* HoleInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB29294E39BC00A3424F /* HoleInfoTests.swift */; };
 		02CCDB2E294E568A00A3424F /* CourseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB2D294E568A00A3424F /* CourseDatabase.swift */; };
 		02CCDB332956812100A3424F /* TestCreateCourseAndRound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02CCDB322956812100A3424F /* TestCreateCourseAndRound.swift */; };
@@ -60,6 +65,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		029D88AB2965408100B91F22 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		029D88AD29654ADC00B91F22 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		029D88B129654D0300B91F22 /* HoleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleInfo.swift; sourceTree = "<group>"; };
+		029D88BF2965547900B91F22 /* HoleInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HoleInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		029D88C52965551D00B91F22 /* TeeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeeData.swift; sourceTree = "<group>"; };
+		029D88C62965551D00B91F22 /* TeeData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TeeData+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		029D88CF29655C1400B91F22 /* Course+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Course+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		02CCDAEB294C24E500A3424F /* GolfScorecard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GolfScorecard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02CCDAEE294C24E500A3424F /* GolfScorecardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfScorecardApp.swift; sourceTree = "<group>"; };
 		02CCDAF0294C24E500A3424F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -76,8 +88,6 @@
 		02CCDB1F294C402A00A3424F /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		02CCDB21294C40CC00A3424F /* Hole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hole.swift; sourceTree = "<group>"; };
 		02CCDB23294D8ECA00A3424F /* Golfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Golfer.swift; sourceTree = "<group>"; };
-		02CCDB25294D8F5900A3424F /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
-		02CCDB27294D9A3000A3424F /* HoleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleInfo.swift; sourceTree = "<group>"; };
 		02CCDB29294E39BC00A3424F /* HoleInfoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleInfoTests.swift; sourceTree = "<group>"; };
 		02CCDB2D294E568A00A3424F /* CourseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDatabase.swift; sourceTree = "<group>"; };
 		02CCDB322956812100A3424F /* TestCreateCourseAndRound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCreateCourseAndRound.swift; sourceTree = "<group>"; };
@@ -160,6 +170,7 @@
 				02CCDB96295E788F00A3424F /* RoundOverviewView.swift */,
 				02CCDAF2294C24E600A3424F /* Assets.xcassets */,
 				02CCDAF7294C24E600A3424F /* GolfScorecard.entitlements */,
+				029D88AA2965408100B91F22 /* DataModel.xcdatamodeld */,
 				02CCDAF4294C24E600A3424F /* Preview Content */,
 				02CCDB3E295D24AD00A3424F /* DataStorage */,
 			);
@@ -196,14 +207,18 @@
 		02CCDB3E295D24AD00A3424F /* DataStorage */ = {
 			isa = PBXGroup;
 			children = (
+				029D88CF29655C1400B91F22 /* Course+CoreDataProperties.swift */,
+				029D88C52965551D00B91F22 /* TeeData.swift */,
+				029D88C62965551D00B91F22 /* TeeData+CoreDataProperties.swift */,
+				029D88B129654D0300B91F22 /* HoleInfo.swift */,
+				029D88AD29654ADC00B91F22 /* Course.swift */,
+				029D88BF2965547900B91F22 /* HoleInfo+CoreDataProperties.swift */,
 				02CCDB23294D8ECA00A3424F /* Golfer.swift */,
 				02CCDB3629581FFC00A3424F /* GolferList.swift */,
 				02CCDBA02960BE3500A3424F /* Authenticate.swift */,
 				02CCDB19294C251F00A3424F /* Round.swift */,
 				02CCDB2D294E568A00A3424F /* CourseDatabase.swift */,
-				02CCDB25294D8F5900A3424F /* Course.swift */,
 				02CCDB342956842600A3424F /* RetreivalError.swift */,
-				02CCDB27294D9A3000A3424F /* HoleInfo.swift */,
 				02CCDB9C295FED0A00A3424F /* NamesOfScores.swift */,
 				02CCDB21294C40CC00A3424F /* Hole.swift */,
 				02CCDB1D294C3EE800A3424F /* Shot.swift */,
@@ -345,21 +360,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				029D88C22965547900B91F22 /* HoleInfo+CoreDataProperties.swift in Sources */,
 				02CCDB8C295D681100A3424F /* ManageRoundsView.swift in Sources */,
 				02CCDB8E295D69FE00A3424F /* NewAccountView.swift in Sources */,
 				02CCDB9F29601FB400A3424F /* ReportView.swift in Sources */,
 				02CCDB97295E788F00A3424F /* RoundOverviewView.swift in Sources */,
 				02CCDB22294C40CC00A3424F /* Hole.swift in Sources */,
-				02CCDB28294D9A3000A3424F /* HoleInfo.swift in Sources */,
 				02CCDAF1294C24E500A3424F /* LoginView.swift in Sources */,
+				029D88B329654D0300B91F22 /* HoleInfo.swift in Sources */,
+				029D88C72965551D00B91F22 /* TeeData.swift in Sources */,
 				02CCDB8A295D653D00A3424F /* GolferHomePage.swift in Sources */,
 				02CCDB20294C402A00A3424F /* Position.swift in Sources */,
 				02CCDB1A294C251F00A3424F /* Round.swift in Sources */,
 				02CCDB3729581FFC00A3424F /* GolferList.swift in Sources */,
 				02CCDB1E294C3EE800A3424F /* Shot.swift in Sources */,
+				029D88C82965551D00B91F22 /* TeeData+CoreDataProperties.swift in Sources */,
 				02CCDB93295D6D7800A3424F /* ListEditView.swift in Sources */,
 				02CCDB352956842600A3424F /* RetreivalError.swift in Sources */,
 				02CCDB95295E65D100A3424F /* RoundEditView.swift in Sources */,
+				029D88D029655C1400B91F22 /* Course+CoreDataProperties.swift in Sources */,
 				02CCDB24294D8ECA00A3424F /* Golfer.swift in Sources */,
 				02CCDB90295D6D4200A3424F /* AddRoundSetupView.swift in Sources */,
 				02CCDBA32960F9F300A3424F /* ManageAccountView.swift in Sources */,
@@ -367,8 +386,9 @@
 				02CCDB9B295E9FDF00A3424F /* Penalty.swift in Sources */,
 				02CCDB3D295CEC3200A3424F /* Filter.swift in Sources */,
 				02CCDB3B295C24F700A3424F /* Report.swift in Sources */,
-				02CCDB26294D8F5900A3424F /* Course.swift in Sources */,
+				029D88AF29654ADC00B91F22 /* Course.swift in Sources */,
 				02CCDAEF294C24E500A3424F /* GolfScorecardApp.swift in Sources */,
+				029D88AC2965408100B91F22 /* DataModel.xcdatamodeld in Sources */,
 				02CCDBA12960BE3500A3424F /* Authenticate.swift in Sources */,
 				02CCDB2E294E568A00A3424F /* CourseDatabase.swift in Sources */,
 			);
@@ -696,6 +716,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		029D88AA2965408100B91F22 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				029D88AB2965408100B91F22 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 029D88AB2965408100B91F22 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 02CCDAE3294C24E500A3424F /* Project object */;
 }

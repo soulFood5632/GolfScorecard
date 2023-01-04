@@ -280,7 +280,7 @@ class Golfer {
      */
     public func getMostCommonCourse() -> Course {
         if mostPopularCourse != nil {
-            return mostPopularCourse ?? Course.sampleCourseInfo
+            return mostPopularCourse!
         }
         var mostCommonCourse: Course? = nil
         var currentMaxFrequency = 0
@@ -293,7 +293,7 @@ class Golfer {
         }
         
         mostPopularCourse = mostCommonCourse
-        return mostCommonCourse ?? Course.sampleCourseInfo
+        return mostCommonCourse!
     }
     
     
@@ -352,15 +352,15 @@ class Golfer {
 }
 
 extension Golfer {
-    static var sampleGolfer: Golfer {
-        let myGolfer = Golfer(userID: "loganu13", nickname: "Logan Underwood", password: "Magenta^2")
-        myGolfer.addRound(roundToAdd: Round.exampleRound)
-        return myGolfer
-    }
-    
-    static var lazyGolfer: Golfer {
-        let myGolfer = Golfer(userID: "NikYak67", nickname: "NikYak", password: "Pollution56")
-        return myGolfer
-    }
+//    static var sampleGolfer: Golfer {
+//        let myGolfer = Golfer(userID: "loganu13", nickname: "Logan Underwood", password: "Magenta^2")
+//        myGolfer.addRound(roundToAdd: Round.exampleRound)
+//        return myGolfer
+//    }
+//    
+//    static var lazyGolfer: Golfer {
+//        let myGolfer = Golfer(userID: "NikYak67", nickname: "NikYak", password: "Pollution56")
+//        return myGolfer
+//    }
     
 }
